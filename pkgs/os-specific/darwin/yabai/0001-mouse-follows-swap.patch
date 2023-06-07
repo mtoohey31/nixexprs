@@ -1,0 +1,31 @@
+From 612465d4000cc747a1673a4b422f863aa2bfdc25 Mon Sep 17 00:00:00 2001
+From: Matthew Toohey <contact@mtoohey.com>
+Date: Sat, 19 Nov 2022 19:55:08 -0500
+Subject: [PATCH] mouse follows swap
+
+---
+ src/window_manager.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/src/window_manager.c b/src/window_manager.c
+index b07a88b..96b07e1 100644
+--- a/src/window_manager.c
++++ b/src/window_manager.c
+@@ -1812,6 +1812,14 @@ enum window_op_error window_manager_swap_window(struct space_manager *sm, struct
+     }
+ 
+     window_manager_animate_window_list(window_list, ts_buf_len(window_list));
++
++    if (wm->enable_mff) {
++        struct window *focused_window_dest = NULL;
++        if (a->id == wm->focused_window_id) focused_window_dest = b;
++        else if (b->id == wm->focused_window_id) focused_window_dest = a;
++        if (focused_window_dest) window_manager_center_mouse(wm, focused_window_dest);
++    }
++
+     return WINDOW_OP_ERROR_SUCCESS;
+ }
+ 
+-- 
+2.37.1 (Apple Git-137.1)
+

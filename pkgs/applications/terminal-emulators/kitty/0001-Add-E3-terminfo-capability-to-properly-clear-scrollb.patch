@@ -1,0 +1,46 @@
+From 5e8279e2d92dcd6f23408f2bf08b9ad1290d5b45 Mon Sep 17 00:00:00 2001
+From: Matthew Toohey <contact@mtoohey.com>
+Date: Sat, 22 Apr 2023 22:46:04 -0400
+Subject: [PATCH] Add E3 terminfo capability to properly clear scrollback
+
+---
+ kitty/terminfo.py       | 3 +++
+ terminfo/kitty.terminfo | 1 +
+ 2 files changed, 4 insertions(+)
+
+diff --git a/kitty/terminfo.py b/kitty/terminfo.py
+index a8aa010ce..2ef41baae 100644
+--- a/kitty/terminfo.py
++++ b/kitty/terminfo.py
+@@ -141,6 +141,8 @@ def encode_keystring(keybytes: bytes) -> str:
+     # Delete the specified number of lines
+     'dl': r'\E[%p1%dM',
+     'dl1': r'\E[M',
++    # Clear scrollback buffer
++    'E3': r'\E[3J',
+     # Erase specified number of characters
+     'ech': r'\E[%p1%dX',
+     # Clear to end of screen
+@@ -337,6 +339,7 @@ def encode_keystring(keybytes: bytes) -> str:
+     'mh': 'dim',
+     'DL': 'dl',
+     'dl': 'dl1',
++    'E3': 'E3',
+     'ec': 'ech',
+     'cd': 'ed',
+     'ce': 'el',
+diff --git a/terminfo/kitty.terminfo b/terminfo/kitty.terminfo
+index 96de693b0..5e7568ace 100644
+--- a/terminfo/kitty.terminfo
++++ b/terminfo/kitty.terminfo
+@@ -16,6 +16,7 @@ xterm-kitty|KovIdTTY,
+ 	it#8,
+ 	lines#24,
+ 	pairs#32767,
++	E3=\E[3J,
+ 	Smulx=\E[4:%p1%dm,
+ 	Sync=\EP=%p1%ds\E\\,
+ 	acsc=++\,\,--..00``aaffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+-- 
+2.39.2
+
