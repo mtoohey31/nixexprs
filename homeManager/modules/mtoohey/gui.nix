@@ -1,15 +1,21 @@
-{ firefox-addons, lf-exa-icons, nixexprs, config, lib, pkgs, ... }:
+{ firefox-addons, lf-exa-icons, nixexprs, qbpm, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.gui.enable = lib.mkEnableOption "gui";
 
   config = lib.mkIf config.mtoohey.gui.enable {
-    nixpkgs.overlays = [ nixexprs.overlays.default ];
+    nixpkgs.overlays = [
+      lf-exa-icons.overlays.default
+      nixexprs.overlays.default
+      (final: _: {
+        qbpm = qbpm.packages.${final.system}.default;
+      })
+    ];
 
     home.packages = with pkgs; [
       ibm-plex
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      qbpm
+      pkgs.qbpm
       socat
     ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
       noto-fonts
@@ -362,23 +368,18 @@
               remember = false;
             };
             editor.command = command_prefix ++ [ "$EDITOR {file}" ];
-            fileselect =
-              let
-                # TODO: introduce this using an overlay instead
-                lifo = lf-exa-icons.packages.${pkgs.system}.lf-exa-icons-output;
-              in
-              {
-                handler = "external";
-                single_file.command = command_prefix ++ [
-                  ". ${lifo} && lf -command 'map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
-                ];
-                multiple_files.command = command_prefix ++ [
-                  ". ${lifo} && lf -command 'map <enter> \${{echo \\\"$fx\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
-                ];
-                folder.command = command_prefix ++ [
-                  ". ${lifo} && lf -command 'set dironly; map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
-                ];
-              };
+            fileselect = {
+              handler = "external";
+              single_file.command = command_prefix ++ [
+                ". ${pkgs.lf-exa-icons-output} && lf -command 'map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
+              ];
+              multiple_files.command = command_prefix ++ [
+                ". ${pkgs.lf-exa-icons-output} && lf -command 'map <enter> \${{echo \\\"$fx\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
+              ];
+              folder.command = command_prefix ++ [
+                ". ${pkgs.lf-exa-icons-output} && lf -command 'set dironly; map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
+              ];
+            };
             fonts = {
               default_size = if pkgs.stdenv.hostPlatform.isDarwin then "16pt" else "12pt";
               default_family = "JetBrainsMono Nerd Font";

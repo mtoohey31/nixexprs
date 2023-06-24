@@ -9,6 +9,11 @@
   config = lib.mkIf config.mtoohey.common.enable {
     home.stateVersion = "20.09";
 
+    nixpkgs.overlays = [
+      lf-exa-icons.overlays.default
+      vimv2.overlays.default
+    ];
+
     home.packages = with pkgs; [
       archiver
       comma
@@ -16,8 +21,7 @@
       jq
       ripgrep
       trash-cli
-      # TODO: introduce this using an overlay instead
-      vimv2.packages.${pkgs.system}.default
+      pkgs.vimv2
       wget
     ];
 
@@ -222,8 +226,8 @@
             abbr e "$EDITOR"
             abbr cat bat
 
-            source ${lf-exa-icons.packages.${pkgs.system}.lf-exa-icons-output}
-          ''; # TODO: introduce the above using an overlay
+            source ${pkgs.lf-exa-icons-output}
+          '';
         };
         git = {
           enable = true;

@@ -4,11 +4,14 @@
   options.mtoohey.devel.enable = lib.mkEnableOption "devel";
 
   config = lib.mkIf config.mtoohey.devel.enable {
+    nixpkgs.overlays = [
+      uncommitted-rs.overlays.default
+    ];
+
     home.packages = with pkgs; [
       nil
       nix-index
-      # TODO: introduce this using an overlay instead
-      uncommitted-rs.packages.${pkgs.system}.default
+      pkgs.uncommitted-rs
       watchexec
     ];
 
