@@ -1,4 +1,4 @@
-{ firefox-addons, lf-exa-icons, nixexprs, qbpm, config, lib, pkgs, ... }:
+{ firefox-addons, lf-exa-icons, qbpm, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.gui.enable = lib.mkEnableOption "gui";
@@ -6,7 +6,6 @@
   config = lib.mkIf config.mtoohey.gui.enable {
     nixpkgs.overlays = [
       lf-exa-icons.overlays.default
-      nixexprs.overlays.default
       (final: _: {
         qbpm = qbpm.packages.${final.system}.default;
       })

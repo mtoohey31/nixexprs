@@ -1,4 +1,4 @@
-{ lf-exa-icons, vimv2, config, lib, pkgs, ... }:
+{ lf-exa-icons, nixexprs, vimv2, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.common.enable = lib.mkOption {
@@ -11,6 +11,7 @@
 
     nixpkgs.overlays = [
       lf-exa-icons.overlays.default
+      nixexprs.overlays.default
       vimv2.overlays.default
     ];
 

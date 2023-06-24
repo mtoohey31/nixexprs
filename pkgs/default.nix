@@ -4,6 +4,7 @@ let inherit (pkgs) callPackage; in
   brave = callPackage ./applications/networking/browsers/brave {
     inherit (pkgs) brave;
   };
+  exa = callPackage ./tools/misc/exa { inherit (pkgs) exa; };
   gickup = callPackage ./applications/backup/gickup { };
   kitty = callPackage ./applications/terminal-emulators/kitty {
     inherit (pkgs) kitty;
