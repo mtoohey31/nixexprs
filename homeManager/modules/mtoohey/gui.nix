@@ -23,8 +23,9 @@
 
     home.file.Downloads.source = config.lib.file.mkOutOfStoreSymlink config.home.homeDirectory;
     xdg = {
-      configFile."fontconfig/fonts.conf".source =
-        lib.mkIf pkgs.stdenv.hostPlatform.isLinux ./gui/fonts.conf;
+      configFile."fontconfig/fonts.conf" = lib.mkIf
+        pkgs.stdenv.hostPlatform.isLinux
+        { source = ./gui/fonts.conf; };
       dataFile =
         let
           qutebrowserPrefix =
