@@ -59,11 +59,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1673068205,
-        "narHash": "sha256-udgiBeHwgqU59Av1mArZB6EbUkFT8HTFp0lVKI/7vd8=",
+        "lastModified": 1687651002,
+        "narHash": "sha256-DFMt7EOV0tYEWPkJSFw070Hv+4ErPF8vcnLsbYQ77Ms=",
         "owner": "mtoohey31",
         "repo": "lf-exa-icons",
-        "rev": "55ab6f3e6551833342efd3eb158d6b4ea4a30848",
+        "rev": "74bfa39a9b0764bf2f772ab76fe5dd2835dd72d9",
         "type": "github"
       },
       "original": {
