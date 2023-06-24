@@ -384,11 +384,21 @@
                   "*" = "*";
                   "`" = "`";
                   "$" = "$";
+                  "<" = ">";
+                  "(" = ")";
+                  "[" = "]";
+                  "{" = "}";
+                  "|" = "|";
                   # TODO: implement support for multi-character auto-pairs, see:
                   # https://github.com/helix-editor/helix/issues/4035
                   # "__" = "__";
                   # "**" = "**";
                   # "```" = "```";
+                  # "\{" = "\}";
+                  # "\left(" = "\right)";
+                  # "\left[" = "\right]";
+                  # "\left\{" = "\right\}";
+                  # "\left|" = "\right|";
                 };
               }
             ];
