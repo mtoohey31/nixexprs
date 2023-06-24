@@ -235,7 +235,6 @@
             core.quotePath = false;
             init.defaultBranch = "main";
           };
-          ignores = [ ".direnv/" ];
           aliases = {
             a = "add --verbose";
             aa = "add --all --verbose";
