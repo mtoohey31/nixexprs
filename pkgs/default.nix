@@ -5,6 +5,7 @@ let inherit (pkgs) callPackage; in
   kitty = callPackage ./applications/terminal-emulators/kitty {
     inherit (pkgs) kitty;
   };
+  kitty-window = callPackage ./applications/terminal-emulators/kitty-window { };
 } // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
   Karabiner-DriverKit-VirtualHIDDevice = callPackage
     ./os-specific/darwin/Karabiner-DriverKit-VirtualHIDDevice

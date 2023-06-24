@@ -1,5 +1,30 @@
 {
   "nodes": {
+    "firefox-addons": {
+      "inputs": {
+        "flake-utils": [
+          "utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1686024140,
+        "narHash": "sha256-bR1Ua8ucl3FwkqnToP9b9PBR4O4GLu3PIu+T9ISc+c8=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "52ee9f7eccae028fca3dabbd0e75603a916d3ac6",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "kmonad": {
       "inputs": {
         "nixpkgs": [
@@ -24,6 +49,70 @@
         "url": "https://github.com/kmonad/kmonad?dir=nix"
       }
     },
+    "lf-exa-icons": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1673068205,
+        "narHash": "sha256-udgiBeHwgqU59Av1mArZB6EbUkFT8HTFp0lVKI/7vd8=",
+        "owner": "mtoohey31",
+        "repo": "lf-exa-icons",
+        "rev": "55ab6f3e6551833342efd3eb158d6b4ea4a30848",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mtoohey31",
+        "repo": "lf-exa-icons",
+        "type": "github"
+      }
+    },
+    "naersk": {
+      "inputs": {
+        "nixpkgs": [
+          "uncommitted-rs",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1671096816,
+        "narHash": "sha256-ezQCsNgmpUHdZANDCILm3RvtO1xH8uujk/+EqNvzIOg=",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "rev": "d998160d6a076cfe8f9741e56aeec7e267e3e114",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685764721,
+        "narHash": "sha256-CIy1iwQTEKfZRrid4gBLA+r/LPGA9IUFo0lKJVyECGI=",
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "rev": "669ca1f2e2bc401abab6b837ae9c51503edc9b49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1685931219,
@@ -41,9 +130,14 @@
     },
     "root": {
       "inputs": {
+        "firefox-addons": "firefox-addons",
         "kmonad": "kmonad",
+        "lf-exa-icons": "lf-exa-icons",
+        "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
-        "utils": "utils"
+        "uncommitted-rs": "uncommitted-rs",
+        "utils": "utils",
+        "vimv2": "vimv2"
       }
     },
     "systems": {
@@ -58,6 +152,30 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "uncommitted-rs": {
+      "inputs": {
+        "naersk": "naersk",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1678762053,
+        "narHash": "sha256-9Qyk/bFm0KQrI4tBp9lVIl9udXKzzcE9YjrKkGpSXx8=",
+        "owner": "mtoohey31",
+        "repo": "uncommitted-rs",
+        "rev": "c5098b4f954d38afd380ab0f9c78ad5f3beeea61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mtoohey31",
+        "repo": "uncommitted-rs",
         "type": "github"
       }
     },
@@ -76,6 +194,29 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "vimv2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682037908,
+        "narHash": "sha256-dTo2x0zCn2nwXLsikW/FRPOhBE6PtH4dVYZBUD4h38A=",
+        "owner": "mtoohey31",
+        "repo": "vimv2",
+        "rev": "675a362e6fef349a39c003403f61a894b149b3c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mtoohey31",
+        "repo": "vimv2",
         "type": "github"
       }
     }

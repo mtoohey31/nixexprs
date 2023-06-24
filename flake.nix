@@ -5,9 +5,41 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     utils.url = "github:numtide/flake-utils";
 
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "utils";
+      };
+    };
     kmonad = {
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lf-exa-icons = {
+      url = "github:mtoohey31/lf-exa-icons";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "utils";
+      };
+    };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    uncommitted-rs = {
+      url = "github:mtoohey31/uncommitted-rs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "utils";
+      };
+    };
+    vimv2 = {
+      url = "github:mtoohey31/vimv2";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "utils";
+      };
     };
   };
 
@@ -15,7 +47,11 @@
     lib = import ./lib nixpkgs.lib;
 
     darwinModules = { }; # TODO
-    homeManagerModules = { }; # TODO
+    hmModules = self.lib.callModules {
+      moduleListPath = ./homeManager/modules/module-list.nix;
+      inherit inputs;
+      selfName = "nixexprs";
+    };
     nixOnDroidModules = { }; # TODO
     nixosModules = { }; # TODO
 
