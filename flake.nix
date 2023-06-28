@@ -56,7 +56,7 @@
 
     darwinModules = { }; # TODO
     hmModules = self.lib.callModules {
-      moduleListPath = ./homeManager/modules/module-list.nix;
+      moduleListPath = ./home-manager/modules/module-list.nix;
       inherit inputs;
       selfName = "nixexprs";
     };
