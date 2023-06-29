@@ -54,7 +54,11 @@
   outputs = { self, nixpkgs, utils, ... }@inputs: {
     lib = import ./lib nixpkgs.lib;
 
-    darwinModules = { }; # TODO
+    darwinModules = self.lib.callModules {
+      moduleListPath = ./nix-darwin/modules/module-list.nix;
+      inherit inputs;
+      selfName = "nixexprs";
+    };
     homeManagerModules = self.lib.callModules {
       moduleListPath = ./home-manager/modules/module-list.nix;
       inherit inputs;
