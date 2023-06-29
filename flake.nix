@@ -55,7 +55,7 @@
     lib = import ./lib nixpkgs.lib;
 
     darwinModules = { }; # TODO
-    hmModules = self.lib.callModules {
+    homeManagerModules = self.lib.callModules {
       moduleListPath = ./home-manager/modules/module-list.nix;
       inherit inputs;
       selfName = "nixexprs";
