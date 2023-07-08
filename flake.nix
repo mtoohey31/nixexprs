@@ -74,12 +74,11 @@
         overlays = builtins.attrValues self.overlays;
         inherit system;
       };
-      inherit (pkgs) deadnix gnumake graphviz mkShell nil nix-du nixpkgs-fmt
-        statix;
+      inherit (pkgs) deadnix gnumake mkShell nil nixpkgs-fmt statix;
     in
     {
       devShells.default = mkShell {
-        packages = [ deadnix gnumake graphviz nil nix-du nixpkgs-fmt statix ];
+        packages = [ deadnix gnumake nil nixpkgs-fmt statix ];
       };
 
       packages = self.lib.filterSupportedPackages system

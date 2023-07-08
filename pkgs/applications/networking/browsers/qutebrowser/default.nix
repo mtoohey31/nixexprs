@@ -7,7 +7,10 @@ if stdenv.hostPlatform.isDarwin then
     inherit (qutebrowser) version;
     sourceRoot = "qutebrowser.app";
     src = fetchurl {
-      url = "https://github.com/qutebrowser/qutebrowser/releases/download/v${version}/qutebrowser-${version}.dmg";
+      url = assert version == "2.5.4";
+        # TODO: remove this downgrade after a newer version is available
+        let version = "2.5.3"; in
+        "https://github.com/qutebrowser/qutebrowser/releases/download/v${version}/qutebrowser-${version}.dmg";
       sha256 = "T3DMZhIuXxI1tDCEi7knu6lscGCVSjU1UW76SaKd1N4=";
     };
     buildInputs = [ undmg ];
