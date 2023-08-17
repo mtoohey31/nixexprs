@@ -410,6 +410,7 @@
           settings = {
             theme = "nord";
             editor = {
+              auto-info = false;
               idle-timeout = 0;
               scrolloff = 7;
               line-number = "relative";
