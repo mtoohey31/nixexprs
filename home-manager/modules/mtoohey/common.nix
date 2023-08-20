@@ -50,8 +50,6 @@
     # only consumers still get the in-path nixpkgs version locked to the version
     # used for their home config
 
-    # TODO: investigate if the mkDefault here is still necessary
-    # allows for overriding by home-manager's nixos module
     nix.package = lib.mkDefault pkgs.nixFlakes;
 
     home.sessionVariables = {

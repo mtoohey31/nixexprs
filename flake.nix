@@ -73,8 +73,6 @@
       inherit inputs;
       selfName = "nixexprs";
     };
-    nixOnDroidModules = { }; # TODO
-    nixosModules = { }; # TODO
 
     overlays.default = _: prev: let pkgs = prev; in import ./pkgs inputs pkgs;
   } // utils.lib.eachDefaultSystem (system:
