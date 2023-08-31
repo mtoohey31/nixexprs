@@ -460,9 +460,6 @@
                   Q = ":quit!";
                   Z = ":write-quit";
                 };
-                "C-w"."|" = [ "vsplit" "file_picker" ];
-                "C-w".minus = [ "hsplit" "file_picker" ];
-                "C-w"."_" = [ "hsplit" "file_picker" ];
                 space = {
                   i = [ ":toggle-option lsp.display-inlay-hints" ];
                   m = [ ":toggle-option auto-format" ];
