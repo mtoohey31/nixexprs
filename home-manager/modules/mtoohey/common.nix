@@ -146,6 +146,7 @@
               export VISUAL=hx
               export PAGER=bat
               export MANPAGER=${batmanPager}
+              export MANROFFOPT="-c"
 
               if test -z "$COLORTERM" && string match '*-256color' "$TERM" >/dev/null
                 export COLORTERM=truecolor
