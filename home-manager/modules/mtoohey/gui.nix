@@ -82,9 +82,8 @@
               inherit (pkgs.stdenv.hostPlatform) system;
               inherit (firefox-addons.lib.${system}) buildFirefoxXpiAddon;
               inherit (firefox-addons.packages.${system}) bitwarden
-                don-t-fuck-with-paste furiganaize h264ify
-                multi-account-containers temporary-containers
-                theme-nord-polar-night;
+                don-t-fuck-with-paste furiganaize gruvbox-dark-theme h264ify
+                multi-account-containers temporary-containers;
               yomichan = buildFirefoxXpiAddon {
                 pname = "yomichan";
                 version = "22.10.23.0";
@@ -98,11 +97,11 @@
               bitwarden
               don-t-fuck-with-paste
               furiganaize
+              gruvbox-dark-theme
               h264ify
               multi-account-containers
               # NOTE: manually enable "Automatic Mode"
               temporary-containers
-              theme-nord-polar-night
               # NOTE: manually install JMDict dictionary from
               # https://github.com/FooSoft/yomichan/raw/dictionaries/jmdict_english.zip
               # and disable startup notification
@@ -237,13 +236,13 @@
           };
         extraConfig =
           let
-            nord-kitty = builtins.fetchurl {
-              url = "https://raw.githubusercontent.com/connorholyday/nord-kitty/3a819c1f207cd2f98a6b7c7f9ebf1c60da91c9e9/nord.conf";
-              sha256 = "1fbnc6r9mbqb6wxqqi9z8hjhfir44rqd6ynvbc49kn6gd8v707p1";
+            gruvbox-kitty = builtins.fetchurl {
+              url = "https://raw.githubusercontent.com/wdomitrz/kitty-gruvbox-theme/b930abcc3a1cdcc763fb65988f07ee0270710f9c/gruvbox_dark.conf";
+              sha256 = "1msaz916a7qrsn4dqcygwynanqqm0mw2cpwf18ab7ljn9xzrdnlp";
             };
           in
           ''
-            include ${nord-kitty}
+            include ${gruvbox-kitty}
           '' + (if pkgs.stdenv.hostPlatform.isDarwin then ''
             font_family JetBrainsMono Nerd Font Mono Regular
             bold_font JetBrainsMono Nerd Font Mono Bold
@@ -407,7 +406,7 @@
                       <head>
                         <title>new tab</title>
                       </head>
-                      <body style="background: #${(import ../../themes/nord.nix).nord0}" />
+                      <body style="background: #${(import ../../themes/gruvbox.nix).bg}" />
                     </html>
                   '';
                 in
@@ -417,15 +416,15 @@
           };
         extraConfig =
           let
-            nord-qutebrowser = builtins.fetchurl {
-              url = "https://raw.githubusercontent.com/Linuus/nord-qutebrowser/c7f89c0991bdb8e02ede67356355cd9ae891d2be/nord-qutebrowser.py";
-              sha256 = "03jq1xw4vc75dz40jb5apz698ks1nx5q2lkz4w3kw8ml1j5pfwq0";
+            gruvbox-qutebrowser = builtins.fetchurl {
+              url = "https://raw.githubusercontent.com/The-Compiler/dotfiles/master/qutebrowser/gruvbox.py";
+              sha256 = "16v9p81h059mzdvikg4d1dfhbj5v8jqbsgw9yanrpq6cfj7wrx6l";
             };
           in
           ''
             config.unbind('<Ctrl-v>')
             config.unbind('<Ctrl-a>')
-            config.source('${nord-qutebrowser}')
+            config.source('${gruvbox-qutebrowser}')
             import json
           '' + lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
             c.qt.args = ["single-process"]
@@ -439,7 +438,7 @@
       zathura = {
         enable = true;
         extraConfig = "unmap r";
-        options = with import ../../themes/nord.nix; {
+        options = with import ../../themes/gruvbox.nix; {
           guioptions = "";
           adjust-open = "width";
           font = "JetBrainsMono Nerd Font 12";
@@ -448,35 +447,43 @@
           # in a browser; see https://tex.stackexchange.com/questions/564989
           sandbox = "none";
 
-          completion-bg = "#${nord0}";
-          completion-fg = "#${nord4}";
-          completion-group-bg = "#${nord0}";
-          completion-group-fg = "#${nord11}";
-          completion-highlight-bg = "#${nord4}";
-          completion-highlight-fg = "#${nord0}";
+          # https://github.com/eastack/zathura-gruvbox/blob/0b49904fe77e6eb676a6318c1acb03afeb2965bb/zathura-gruvbox-dark
+          notification-error-bg = "#${bg}";
+          notification-error-fg = "#${bright_red}";
+          notification-warning-bg = "#${bg}";
+          notification-warning-fg = "#${bright_yellow}";
+          notification-bg = "#${bg}";
+          notification-fg = "#${bright_green}";
 
-          recolor-lightcolor = "#${nord0}";
-          recolor-darkcolor = "#${nord4}";
-          default-bg = "#${nord0}";
+          completion-bg = "#${bg2}";
+          completion-fg = "#${fg}";
+          completion-group-bg = "#${bg1}";
+          completion-group-fg = "#${gray}";
+          completion-highlight-bg = "#${bright_blue}";
+          completion-highlight-fg = "#${bg2}";
 
-          inputbar-bg = "#${nord0}";
-          inputbar-fg = "#${nord4}";
-          notification-bg = "#${nord0}";
-          notification-fg = "#${nord4}";
-          notification-error-bg = "#${nord11}";
-          notification-error-fg = "#${nord4}";
-          notification-warning-bg = "#${nord11}";
-          notification-warning-fg = "#${nord4}";
-          statusbar-bg = "#${nord0}";
-          statusbar-fg = "#${nord4}";
-          index-bg = "#${nord0}";
-          index-fg = "#${nord4}";
-          index-active-bg = "#${nord4}";
-          index-active-fg = "#${nord0}";
-          render-loading-bg = "#${nord0}";
-          render-loading-fg = "#${nord4}";
-          highlight-color = "#${nord2}";
-          highlight-active-color = "#${nord12}";
+          index-bg = "#${bg2}";
+          index-fg = "#${fg}";
+          index-active-bg = "#${bright_blue}";
+          index-active-fg = "#${bg2}";
+
+          inputbar-bg = "#${bg}";
+          inputbar-fg = "#${fg}";
+
+          statusbar-bg = "#${bg2}";
+          statusbar-fg = "#${fg}";
+
+          highlight-color = "#${bright_yellow}";
+          highlight-active-color = "#${bright_orange}";
+
+          default-bg = "#${bg}";
+          default-fg = "#${fg}";
+          render-loading = true;
+          render-loading-bg = "#${bg}";
+          render-loading-fg = "#${fg}";
+
+          recolor-lightcolor = "#${bg}";
+          recolor-darkcolor = "#${fg}";
         };
       };
     };

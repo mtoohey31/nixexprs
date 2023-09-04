@@ -151,34 +151,20 @@
                 export COLORTERM=truecolor
               end
             '';
-          loginShellInit = with import ../../themes/nord.nix; ''
-            if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY" -a -z "$TMUX" -a -n "$SSH_CONNECTION"
-              printf '\e]10;#${nord4}\007' # foreground
-              printf '\e]11;#${nord0}\007' # background
-              printf '\e]12;#${nord9}\007' # cursor
-              printf '\e]708;#${nord0}\007' # border background
+          loginShellInit =
+            let
+              gruvbox-palette = builtins.fetchurl {
+                url = "https://raw.githubusercontent.com/morhetz/gruvbox/f1ecde848f0cdba877acb0c740320568252cc482/gruvbox_256palette.sh";
+                sha256 = "1l1hip78llq2qh7xdq45w5llygygsa5zgqaldh2agv5jb6vb5han";
+              };
+            in
+            ''
+              if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY" -a -z "$TMUX" -a -n "$SSH_CONNECTION"
+                source ${gruvbox-palette}
 
-              # colours
-              printf '\e]4;0;#${nord1}\007'
-              printf '\e]4;1;#${nord11}\007'
-              printf '\e]4;2;#${nord14}\007'
-              printf '\e]4;3;#${nord13}\007'
-              printf '\e]4;4;#${nord9}\007'
-              printf '\e]4;5;#${nord15}\007'
-              printf '\e]4;6;#${nord8}\007'
-              printf '\e]4;7;#${nord5}\007'
-              printf '\e]4;8;#${nord3}\007'
-              printf '\e]4;9;#${nord11}\007'
-              printf '\e]4;10;#${nord14}\007'
-              printf '\e]4;11;#${nord13}\007'
-              printf '\e]4;12;#${nord9}\007'
-              printf '\e]4;13;#${nord15}\007'
-              printf '\e]4;14;#${nord7}\007'
-              printf '\e]4;15;#${nord6}\007'
-
-              exec tmux
-            end
-          '';
+                exec tmux
+              end
+            '';
           interactiveShellInit = let stty = if pkgs.stdenv.hostPlatform.isDarwin then "/bin/stty" else "stty"; in ''
             fish_vi_key_bindings
 
@@ -406,7 +392,7 @@
               }
             ];
           settings = {
-            theme = "nord";
+            theme = "gruvbox";
             editor = {
               auto-info = false;
               idle-timeout = 0;
