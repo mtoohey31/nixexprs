@@ -155,8 +155,9 @@
           loginShellInit =
             let
               gruvbox-palette = builtins.fetchurl {
-                url = "https://raw.githubusercontent.com/morhetz/gruvbox/f1ecde848f0cdba877acb0c740320568252cc482/gruvbox_256palette.sh";
-                sha256 = "1l1hip78llq2qh7xdq45w5llygygsa5zgqaldh2agv5jb6vb5han";
+                # https://github.com/morhetz/gruvbox/pull/416
+                url = "https://raw.githubusercontent.com/morhetz/gruvbox/ca12bc7116dc400d719398e2e4b94bbfcefc1cc7/gruvbox_256palette.fish";
+                sha256 = "1rl7zp2jap866qmbcqvl7vswn54pg83q5gafqb921g9vb1zsa3dj";
               };
             in
             ''
