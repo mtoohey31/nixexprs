@@ -76,7 +76,7 @@
         };
         bat = {
           enable = true;
-          config = { style = "plain"; theme = "base16"; };
+          config = { style = "plain"; theme = "gruvbox-dark"; };
         };
         bottom.enable = true;
         direnv = {
