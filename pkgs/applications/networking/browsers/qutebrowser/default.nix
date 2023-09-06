@@ -4,12 +4,11 @@ if stdenv.hostPlatform.isDarwin then
   stdenv.mkDerivation
   rec {
     pname = "qutebrowser";
-    # TODO: remove this downgrade after a newer version is available
-    version = assert qutebrowser.version == "2.5.4"; "2.5.3";
+    inherit (qutebrowser) version;
     sourceRoot = "qutebrowser.app";
     src = fetchurl {
       url = "https://github.com/qutebrowser/qutebrowser/releases/download/v${version}/qutebrowser-${version}.dmg";
-      sha256 = "T3DMZhIuXxI1tDCEi7knu6lscGCVSjU1UW76SaKd1N4=";
+      sha256 = "TFh5UAjU34s0EstNxQWPxVv0m0YrySKt5yKdh4Hl0pc=";
     };
     buildInputs = [ undmg ];
     installPhase = ''
