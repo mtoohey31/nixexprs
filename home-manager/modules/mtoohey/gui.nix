@@ -329,10 +329,10 @@
             "V" = "mode-enter caret";
             "<Ctrl-F>" = "hint --rapid all tab-bg";
             "<Ctrl-e>" = "fake-key <Ctrl-a><Ctrl-c><Ctrl-Shift-e>";
-            "o" = "set statusbar.show always;; set-cmd-text -s :open";
-            "O" = "set statusbar.show always;; set-cmd-text -s :open -t";
-            ":" = "set statusbar.show always;; set-cmd-text :";
-            "/" = "set statusbar.show always;; set-cmd-text /";
+            "o" = "set statusbar.show always;; cmd-set-text -s :open";
+            "O" = "set statusbar.show always;; cmd-set-text -s :open -t";
+            ":" = "set statusbar.show always;; cmd-set-text :";
+            "/" = "set statusbar.show always;; cmd-set-text /";
             "ge" = "scroll-to-perc";
           };
           command = {
@@ -359,7 +359,7 @@
             content = {
               fullscreen.window = true;
               headers.do_not_track = null;
-              javascript.can_access_clipboard = true;
+              javascript.clipboard = "access";
             };
             downloads.location = {
               directory = "${config.home.homeDirectory}";
