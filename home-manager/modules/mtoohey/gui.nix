@@ -48,7 +48,7 @@
               config.lib.file.mkOutOfStoreSymlink
                 "${qutebrowserPrefix}/greasemonkey";
           })
-          { } [ "personal" "gaming" "university" "mod" ];
+          { } [ "personal" "gaming" "university" ];
       desktopEntries = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
         qbpm = {
           type = "Application";
