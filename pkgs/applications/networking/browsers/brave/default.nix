@@ -11,6 +11,7 @@ if stdenv.hostPlatform.isDarwin then
       sha256 = "rPZucMDCAx7S335MSJVDQ38mVjuFYVC/+8Q7uFCbRD8=";
     };
     buildInputs = [ undmg ];
+    dontFixup = true;
     installPhase = ''
       mkdir -p $out/Applications/Brave\ Browser.app
       cp -R . $out/Applications/Brave\ Browser.app

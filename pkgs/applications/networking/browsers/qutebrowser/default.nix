@@ -11,6 +11,7 @@ if stdenv.hostPlatform.isDarwin then
       sha256 = "TFh5UAjU34s0EstNxQWPxVv0m0YrySKt5yKdh4Hl0pc=";
     };
     buildInputs = [ undmg ];
+    dontFixup = true;
     installPhase = ''
       mkdir -p $out/Applications/qutebrowser.app
       cp -R . $out/Applications/qutebrowser.app
