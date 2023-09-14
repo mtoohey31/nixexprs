@@ -460,8 +460,8 @@
         lf = {
           enable = true;
           commands = {
-            archive = ''%arc archive "$argv" "$f"'';
-            chmod = ''%set IFS "$(printf '\n\t')"; chmod "$argv" $fx; lf -remote "send $id reload"'';
+            archive = ''%echo "\"$fx\"" | string join '" "' | xargs arc archive "$argv" && lf -remote "send $id select \"$argv\""'';
+            chmod = ''%echo "\"$fx\"" | string join '" "' | xargs chmod "$argv"; lf -remote "send $id reload"'';
             edit = ''
               ''${{
                   $EDITOR -- "$argv"
