@@ -63,8 +63,9 @@
         enable = true;
         defaultApplications = {
           "application/pdf" = "org.pwmt.zathura.desktop";
-          "image/png" = "nsxiv.desktop";
           "image/jpeg" = "nsxiv.desktop";
+          "image/png" = "nsxiv.desktop";
+          "image/x-portable-pixmap" = "nsxiv.desktop";
           "text/html" = "firefox.desktop";
           "x-scheme-handler/http" = "firefox.desktop";
           "x-scheme-handler/https" = "firefox.desktop";
