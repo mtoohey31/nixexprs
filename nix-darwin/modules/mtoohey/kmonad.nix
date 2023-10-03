@@ -42,8 +42,8 @@ let cfg = config.mtoohey.kmonad; in
       ${pkgs.rsync}/bin/rsync -a --delete ${pkgs.Karabiner-DriverKit-VirtualHIDDevice}/Applications/.Karabiner-VirtualHIDDevice-Manager.app /Applications/.Karabiner-VirtualHIDDevice-Manager.app
       echo copying shim...
       cp --no-preserve mode ${pkgs.kmonad-daemon-shim}/bin/kmonad-daemon-shim /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim
-      chmod og= /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim
       chown root /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim
+      chmod u=rx,og= /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim
       echo activating dext...
       /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
       printf '\x1b[0;31mPlease grant Input Monitoring permissions to /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim in System Preferences > Security & Privacy > Privacy > Input Monitoring\x1b[0m\n'
