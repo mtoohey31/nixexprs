@@ -11,11 +11,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1693972943,
-        "narHash": "sha256-I+2oxoyPE6dOMNjs2nNRd6YZCSiureA8UU+1dcR3MRs=",
+        "lastModified": 1697256168,
+        "narHash": "sha256-pHf9jHZGUeFhbABxpkhloRR2VemsqpzekWGU160fjU4=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "0dd9d065f4bc026180a9f2b24ee48a039bea3384",
+        "rev": "c5774faa4a0f25246d9e8fb3505d4eddc65d272f",
         "type": "gitlab"
       },
       "original": {
@@ -32,11 +32,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1693972774,
-        "narHash": "sha256-Dt9UZs0/DaIex598quYRYFuGabUbvFdNrHuvGc6HjBc=",
+        "lastModified": 1696940889,
+        "narHash": "sha256-p2Wic74A1tZpFcld1wSEbFQQbrZ/tPDuLieCnspamQo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b22d7bab30076bbb73744867d6c5bf7d6380570c",
+        "rev": "6bba64781e4b7c1f91a733583defbd3e46b49408",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1691843304,
-        "narHash": "sha256-W7IXWEJTGmb7bQB++Sej2oJ75fXQx60PZpiiC7QwJJ4=",
+        "lastModified": 1696666273,
+        "narHash": "sha256-qi4hyttzU961GBGDkKs1SYy+xv1ooSv61+fKvineanc=",
         "ref": "refs/heads/master",
-        "rev": "a05e93c62ca2c25cc81d76d9cf36880fe0bf183a",
-        "revCount": 749,
+        "rev": "8440eafdb516a379b4350f3c29a0e919f88cee24",
+        "revCount": 755,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/kmonad/kmonad?dir=nix"
@@ -67,29 +67,6 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/kmonad/kmonad?dir=nix"
-      }
-    },
-    "lf-exa-icons": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1687651002,
-        "narHash": "sha256-DFMt7EOV0tYEWPkJSFw070Hv+4ErPF8vcnLsbYQ77Ms=",
-        "owner": "mtoohey31",
-        "repo": "lf-exa-icons",
-        "rev": "74bfa39a9b0764bf2f772ab76fe5dd2835dd72d9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mtoohey31",
-        "repo": "lf-exa-icons",
-        "type": "github"
       }
     },
     "naersk": {
@@ -120,11 +97,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1692248770,
-        "narHash": "sha256-tZeFpETKQGbgnaSIO1AGWD27IyTcBm4D+A9d7ulQ4NM=",
+        "lastModified": 1696360011,
+        "narHash": "sha256-HpPv27qMuPou4acXcZ8Klm7Zt0Elv9dgDvSJaomWb9Y=",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "511177ffe8226c78c9cf6a92a7b5f2df3684956b",
+        "rev": "8b6ea26d5d2e8359d06278364f41fbc4b903b28a",
         "type": "github"
       },
       "original": {
@@ -140,11 +117,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1693711723,
-        "narHash": "sha256-5QmlVzskLciJ0QzYmZ6ULvKA7bP6pgV9wwrLBB0V3j0=",
+        "lastModified": 1696736548,
+        "narHash": "sha256-Dg0gJ9xVXud55sAbXspMapFYZOpVAldQQo7MFp91Vb0=",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "aca56a79afb82208af2b39d8459dd29c10989135",
+        "rev": "2902dc66f64f733bfb45754e984e958e9fe7faf9",
         "type": "github"
       },
       "original": {
@@ -155,11 +132,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1693844670,
-        "narHash": "sha256-t69F2nBB8DNQUWHD809oJZJVE+23XBrth4QZuVd6IE0=",
+        "lastModified": 1697059129,
+        "narHash": "sha256-9NJcFF9CEYPvHJ5ckE8kvINvI84SZZ87PvqMbH6pro0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3c15feef7770eb5500a4b8792623e2d6f598c9c1",
+        "rev": "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593",
         "type": "github"
       },
       "original": {
@@ -197,7 +174,6 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "kmonad": "kmonad",
-        "lf-exa-icons": "lf-exa-icons",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
@@ -251,11 +227,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1692799911,
-        "narHash": "sha256-3eihraek4qL744EvQXsK1Ha6C3CR7nnT8X2qWap4RNk=",
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "f9e7cf818399d17d347f847525c5a5a8032e4e44",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
         "type": "github"
       },
       "original": {

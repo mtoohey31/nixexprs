@@ -1,3 +1,5 @@
+STATIX_CONFIG := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))/../.statix.toml
+
 .PHONY: lint
 lint: format-check deadnix-check statix-check
 
@@ -19,8 +21,8 @@ deadnix-check:
 
 .PHONY: statix
 statix:
-	statix fix
+	statix fix --config $(STATIX_CONFIG)
 
 .PHONY: statix-check
 statix-check:
-	statix check
+	statix check --config $(STATIX_CONFIG)

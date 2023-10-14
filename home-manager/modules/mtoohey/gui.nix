@@ -1,11 +1,10 @@
-{ firefox-addons, lf-exa-icons, qbpm, config, lib, pkgs, ... }:
+{ firefox-addons, qbpm, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.gui.enable = lib.mkEnableOption "gui";
 
   config = lib.mkIf config.mtoohey.gui.enable {
     nixpkgs.overlays = [
-      lf-exa-icons.overlays.default
       (final: _: {
         qbpm = qbpm.packages.${final.system}.default;
       })
@@ -370,13 +369,13 @@
             fileselect = {
               handler = "external";
               single_file.command = command_prefix ++ [
-                ". ${pkgs.lf-exa-icons-output} && lf -command 'map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
+                "lf -command 'map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
               ];
               multiple_files.command = command_prefix ++ [
-                ". ${pkgs.lf-exa-icons-output} && lf -command 'map <enter> \${{echo \\\"$fx\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
+                "lf -command 'map <enter> \${{echo \\\"$fx\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
               ];
               folder.command = command_prefix ++ [
-                ". ${pkgs.lf-exa-icons-output} && lf -command 'set dironly; map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
+                "lf -command 'set dironly; map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
               ];
             };
             fonts = {

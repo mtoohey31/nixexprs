@@ -25,13 +25,6 @@
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lf-exa-icons = {
-      url = "github:mtoohey31/lf-exa-icons";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "utils";
-      };
-    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

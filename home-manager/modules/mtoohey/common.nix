@@ -1,4 +1,4 @@
-{ lf-exa-icons, nixexprs, vimv2, config, lib, pkgs, ... }:
+{ nixexprs, vimv2, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.common.enable = lib.mkOption {
@@ -10,7 +10,6 @@
     home.stateVersion = "20.09";
 
     nixpkgs.overlays = [
-      lf-exa-icons.overlays.default
       nixexprs.overlays.default
       vimv2.overlays.default
     ];
@@ -18,7 +17,7 @@
     home.packages = with pkgs; [
       archiver
       comma
-      exa
+      eza
       jq
       ripgrep
       trash-cli
@@ -107,10 +106,10 @@
           };
           shellAliases = shellAbbrs // {
             inherit trash-undo;
-            ls = "exa -a --icons --group-directories-first";
-            lsd = "exa -al --icons --group-directories-first";
-            lst = "exa -aT -L 5 --icons --group-directories-first";
-            lsta = "exa -aT --icons --group-directories-first";
+            ls = "eza -a --icons --group-directories-first";
+            lsd = "eza -al --icons --group-directories-first";
+            lst = "eza -aT -L 5 --icons --group-directories-first";
+            lsta = "eza -aT --icons --group-directories-first";
           };
           functions = {
             lfcd = {
@@ -212,8 +211,6 @@
             alias e "$EDITOR"
             abbr e "$EDITOR"
             abbr cat bat
-
-            source ${pkgs.lf-exa-icons-output}
           '';
         };
         git = {

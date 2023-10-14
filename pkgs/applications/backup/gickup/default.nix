@@ -2,12 +2,12 @@
 
 buildGoModule rec {
   pname = "gickup";
-  version = "0.10.18";
+  version = "0.10.21";
   src = fetchFromGitHub {
     owner = "cooperspencer";
     repo = pname;
     rev = "v${version}";
-    sha256 = "9qaGPmrBA/VdXF9D4eSfjZ3xYBSbPKpwG9t2q37sq3I=";
+    sha256 = "o8uLdkk0aZWIj+mKsp/XGKcwpV0rGFcZnmV4MuHKlUg=";
   };
-  vendorSha256 = "uDZCeIdyx60XJ3Cu2M4HocfDysOu5Edp81/eUf45NcE=";
+  vendorSha256 = "NAYkQsCt32mtHFXZC0g3OrlrOceUaeGH4bKWF7B08po=";
 }
