@@ -341,55 +341,57 @@
         };
         helix = {
           enable = true;
-          languages.language =
-            let
-              langFilename = "${pkgs.helix.src}/languages.toml";
-              langData = builtins.fromTOML (builtins.readFile langFilename);
-              defaultFileTypes = language: (lib.lists.findFirst
-                (lang: lang.name == language)
-                (throw "no language \"${language}\" found in ${langFilename}")
-                langData.language).file-types;
-              addFiletypes = language: file-types: {
-                name = language;
-                file-types = (defaultFileTypes language) ++ file-types;
-              };
-            in
-            [
-              (addFiletypes "json" [ "flake.lock" "tfstate" ])
-              (addFiletypes "toml" [ "Cargo.lock" ])
-              {
-                name = "nix";
-                auto-format = true;
-                config.nil.formatting.command = [
-                  "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
-                ];
-              }
-              { name = "haskell"; auto-format = true; }
-              {
-                name = "markdown";
-                auto-pairs = {
-                  "_" = "_";
-                  "*" = "*";
-                  "`" = "`";
-                  "$" = "$";
-                  "<" = ">";
-                  "(" = ")";
-                  "[" = "]";
-                  "{" = "}";
-                  "|" = "|";
-                  # TODO: implement support for multi-character auto-pairs, see:
-                  # https://github.com/helix-editor/helix/issues/4035
-                  # "__" = "__";
-                  # "**" = "**";
-                  # "```" = "```";
-                  # "\{" = "\}";
-                  # "\left(" = "\right)";
-                  # "\left[" = "\right]";
-                  # "\left\{" = "\right\}";
-                  # "\left|" = "\right|";
+          languages = {
+            language =
+              let
+                langFilename = "${pkgs.helix.src}/languages.toml";
+                langData = builtins.fromTOML (builtins.readFile langFilename);
+                defaultFileTypes = language: (lib.lists.findFirst
+                  (lang: lang.name == language)
+                  (throw "no language \"${language}\" found in ${langFilename}")
+                  langData.language).file-types;
+                addFiletypes = language: file-types: {
+                  name = language;
+                  file-types = (defaultFileTypes language) ++ file-types;
                 };
-              }
+              in
+              [
+                (addFiletypes "json" [ "flake.lock" "tfstate" ])
+                (addFiletypes "toml" [ "Cargo.lock" ])
+                {
+                  name = "nix";
+                  auto-format = true;
+                }
+                { name = "haskell"; auto-format = true; }
+                {
+                  name = "markdown";
+                  auto-pairs = {
+                    "_" = "_";
+                    "*" = "*";
+                    "`" = "`";
+                    "$" = "$";
+                    "<" = ">";
+                    "(" = ")";
+                    "[" = "]";
+                    "{" = "}";
+                    "|" = "|";
+                    # TODO: implement support for multi-character auto-pairs, see:
+                    # https://github.com/helix-editor/helix/issues/4035
+                    # "__" = "__";
+                    # "**" = "**";
+                    # "```" = "```";
+                    # "\{" = "\}";
+                    # "\left(" = "\right)";
+                    # "\left[" = "\right]";
+                    # "\left\{" = "\right\}";
+                    # "\left|" = "\right|";
+                  };
+                }
+              ];
+            language-server.nil.config.nil.formatting.command = [
+              "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
             ];
+          };
           settings = {
             theme = "gruvbox";
             editor = {

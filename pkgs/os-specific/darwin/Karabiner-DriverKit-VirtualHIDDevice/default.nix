@@ -2,8 +2,8 @@
 
 stdenv.mkDerivation {
   pname = "Karabiner-DriverKit-VirtualHIDDevice";
-  version = "1.15.0";
-  src = Karabiner-DriverKit-VirtualHIDDevice-src + "/dist/Karabiner-DriverKit-VirtualHIDDevice-1.15.0.pkg";
+  version = "2.1.0";
+  src = Karabiner-DriverKit-VirtualHIDDevice-src + "/dist/Karabiner-DriverKit-VirtualHIDDevice-2.1.0.pkg";
   buildInputs = [ cpio xar ];
   unpackPhase = ''
     xar -xf $src

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-char *const kdv_client[] = {"Karabiner-DriverKit-VirtualHIDDeviceClient"};
+char *const kdv_client[] = {"@client@"};
 
 int main(int argc, char *argv[]) {
   int r = fork();

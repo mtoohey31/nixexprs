@@ -8,7 +8,7 @@ if stdenv.hostPlatform.isDarwin then
     sourceRoot = "qutebrowser.app";
     src = fetchurl {
       url = "https://github.com/qutebrowser/qutebrowser/releases/download/v${version}/qutebrowser-${version}.dmg";
-      sha256 = "TFh5UAjU34s0EstNxQWPxVv0m0YrySKt5yKdh4Hl0pc=";
+      sha256 = "A6dxf1dRpku+qUhUnXwRzta8uBx8JpwK4Lvh10sy9dQ=";
     };
     buildInputs = [ undmg ];
     dontFixup = true;

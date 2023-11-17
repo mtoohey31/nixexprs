@@ -39,7 +39,7 @@ let cfg = config.mtoohey.kmonad; in
 
     system.activationScripts.applications.text = ''
       echo copying dext...
-      ${pkgs.rsync}/bin/rsync -a --delete ${pkgs.Karabiner-DriverKit-VirtualHIDDevice}/Applications/.Karabiner-VirtualHIDDevice-Manager.app /Applications/.Karabiner-VirtualHIDDevice-Manager.app
+      ${pkgs.rsync}/bin/rsync -a --delete ${pkgs.Karabiner-DriverKit-VirtualHIDDevice}/Applications/.Karabiner-VirtualHIDDevice-Manager.app/ /Applications/.Karabiner-VirtualHIDDevice-Manager.app
       echo copying shim...
       cp --no-preserve mode ${pkgs.kmonad-daemon-shim}/bin/kmonad-daemon-shim /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim
       chown root /Applications/.Karabiner-VirtualHIDDevice-Manager.app/kmonad-daemon-shim

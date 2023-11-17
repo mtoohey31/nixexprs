@@ -8,7 +8,7 @@ if stdenv.hostPlatform.isDarwin then
     sourceRoot = "Brave Browser.app";
     src = fetchurl {
       url = "https://github.com/brave/brave-browser/releases/download/v${version}/Brave-Browser-x64.dmg";
-      sha256 = "haxvDa/2++OZTZhIrrXdXGVvYBgBuoWLTjtfo0LDu1g=";
+      sha256 = "pI7FebSOVm3bBqrALidqMj6b3gZLINcvl9w2Ll80mqw=";
     };
     buildInputs = [ undmg ];
     dontFixup = true;
