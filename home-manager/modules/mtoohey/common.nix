@@ -515,6 +515,7 @@
             smartcase = true;
             shell = "fish";
             scrolloff = 7;
+            period = 1;
           };
         };
         nix-index = {
