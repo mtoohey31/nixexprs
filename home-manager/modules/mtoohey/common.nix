@@ -18,6 +18,7 @@
       archiver
       comma
       eza
+      fd
       jq
       ripgrep
       trash-cli
