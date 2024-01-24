@@ -56,6 +56,7 @@
       DIRENV_LOG_FORMAT = "";
       GOPATH = "${config.home.homeDirectory}/.go";
       LESS = "-Ri --incsearch";
+      LS_COLORS = "";
       SHELL = "${pkgs.fish}/bin/fish";
     };
     programs =
