@@ -26,17 +26,7 @@
       wget
     ];
 
-    home.file = {
-      ".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
-      ".local/lib/python2.7/site-packages/usercustomize.py".source = ./common/usercustomize2.py;
-    } // lib.listToAttrs (map
-      (n: {
-        name = ".local/lib/python3.${toString n}/site-packages/usercustomize.py";
-        value.source = ./common/usercustomize3.py;
-      })
-      (lib.range 7 12));
-    # TODO: figure out how to automatically keep the upper end of the range
-    # above in sync with the latest version available in nixpkgs
+    home.file.".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
 
     xdg.configFile."lf/cleaner" = {
       text = ''
