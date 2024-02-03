@@ -1,4 +1,4 @@
-{ nixexprs, vimv2, config, lib, pkgs, ... }:
+{ helix, nixexprs, vimv2, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.common.enable = lib.mkOption {
@@ -10,6 +10,7 @@
     home.stateVersion = "20.09";
 
     nixpkgs.overlays = [
+      helix.overlays.default
       nixexprs.overlays.default
       vimv2.overlays.default
     ];
@@ -336,7 +337,7 @@
           languages = {
             language =
               let
-                langFilename = "${pkgs.helix.src}/languages.toml";
+                langFilename = "${pkgs.helix.unwrapped.src}/languages.toml";
                 langData = builtins.fromTOML (builtins.readFile langFilename);
                 defaultFileTypes = language: (lib.lists.findFirst
                   (lang: lang.name == language)

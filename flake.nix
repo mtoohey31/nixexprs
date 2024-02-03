@@ -21,6 +21,13 @@
         flake-utils.follows = "utils";
       };
     };
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "utils";
+      };
+    };
     kmonad = {
       url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
