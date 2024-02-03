@@ -380,6 +380,10 @@
                     # "\left|" = "\right|";
                   };
                 }
+                {
+                  name = "typst";
+                  auto-format = true;
+                }
               ];
             language-server.nil.config.nil.formatting.command = [
               "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
