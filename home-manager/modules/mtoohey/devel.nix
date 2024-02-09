@@ -24,5 +24,9 @@
       git.lfs.enable = true;
       zsh.enable = true;
     };
+
+    xdg.configFile."gdb/gdbinit".text = ''
+      set auto-load safe-path ${config.home.homeDirectory}/repos
+    '';
   };
 }
