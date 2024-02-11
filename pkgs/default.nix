@@ -1,12 +1,12 @@
 inputs: pkgs:
 let inherit (pkgs) callPackage; in
-{
+rec {
   gickup = callPackage ./applications/backup/gickup { };
   kitty = callPackage ./applications/terminal-emulators/kitty {
     inherit (pkgs) kitty;
   };
   kitty-window = callPackage ./applications/terminal-emulators/kitty-window { };
-  python3Packages = pkgs.python3Packages.overrideScope (final: _: {
+  python3Packages = pkgs.python3Packages.overrideScope (final: prev: {
     fugashi = final.buildPythonPackage rec {
       pname = "fugashi";
       version = "1.2.1";
@@ -104,6 +104,7 @@ let inherit (pkgs) callPackage; in
         TRANSFORMERS_CACHE=$tmp
       '' + oldAttrs.setuptoolsCheckPhase or "";
     });
+    stem = prev.stem.overridePythonAttrs (_: { doCheck = false; });
     torchsummary = final.buildPythonPackage rec {
       pname = "torchsummary";
       version = "1.5.1";
@@ -116,6 +117,11 @@ let inherit (pkgs) callPackage; in
       propagatedBuildInputs = [ final.torch ];
     };
   });
+  qutebrowser = pkgs.qutebrowser.override {
+    python3 = pkgs.python3.overrideAttrs (oldAttrs: {
+      passthru = oldAttrs.passthru // { pkgs = python3Packages; };
+    });
+  };
 } // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
   Karabiner-DriverKit-VirtualHIDDevice = callPackage
     ./os-specific/darwin/Karabiner-DriverKit-VirtualHIDDevice
