@@ -1,9 +1,9 @@
 { cpio, Karabiner-DriverKit-VirtualHIDDevice-src, stdenv, xar }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "Karabiner-DriverKit-VirtualHIDDevice";
-  version = "2.1.0";
-  src = Karabiner-DriverKit-VirtualHIDDevice-src + "/dist/Karabiner-DriverKit-VirtualHIDDevice-2.1.0.pkg";
+  version = "3.1.0";
+  src = Karabiner-DriverKit-VirtualHIDDevice-src + "/dist/Karabiner-DriverKit-VirtualHIDDevice-${version}.pkg";
   buildInputs = [ cpio xar ];
   unpackPhase = ''
     xar -xf $src
