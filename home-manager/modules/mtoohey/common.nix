@@ -392,11 +392,10 @@ let cfg = config.mtoohey.common; in
                     # "\left|" = "\right|";
                   };
                 }
-                {
-                  name = "typst";
-                  auto-format = true;
-                }
-              ];
+              ] ++ lib.optional cfg.helix-overlay {
+                name = "typst";
+                auto-format = true;
+              };
             language-server.nil.config.nil.formatting.command = [
               "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
             ];
