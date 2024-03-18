@@ -17,8 +17,18 @@ let cfg = config.mtoohey.common; in
   config = lib.mkIf config.mtoohey.common.enable {
     home.stateVersion = "20.09";
 
-    nixpkgs.overlays = lib.optional cfg.helix-overlay helix.overlays.default ++ [
-
+    nixpkgs.overlays = lib.optionals cfg.helix-overlay [
+      helix.overlays.default
+      (_: prev:
+        let inherit (prev) helix; in {
+          helix = helix.passthru.wrapper (helix.unwrapped.overrideAttrs
+            (oldAttrs: {
+              patches = (oldAttrs.patches or [ ]) ++ [
+                ./common/only-move-vertically-visually-without-count.patch
+              ];
+            }));
+        })
+    ] ++ [
       nixexprs.overlays.default
       vimv2.overlays.default
     ];

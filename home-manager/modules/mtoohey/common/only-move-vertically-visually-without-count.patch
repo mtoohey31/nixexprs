@@ -1,0 +1,42 @@
+From 9c3447450e9f9acd7c98213740764bc26f366bdd Mon Sep 17 00:00:00 2001
+From: Matthew Toohey <contact@mtoohey.com>
+Date: Sun, 17 Mar 2024 19:54:49 -0400
+Subject: [PATCH] only move vertically visually without count
+
+---
+ helix-term/src/commands.rs | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/helix-term/src/commands.rs b/helix-term/src/commands.rs
+index 133f2d54..1e4b51f7 100644
+--- a/helix-term/src/commands.rs
++++ b/helix-term/src/commands.rs
+@@ -642,7 +642,11 @@ fn move_line_down(cx: &mut Context) {
+ fn move_visual_line_up(cx: &mut Context) {
+     move_impl(
+         cx,
+-        move_vertically_visual,
++        if cx.count.is_some() {
++            move_vertically
++        } else {
++            move_vertically_visual
++        },
+         Direction::Backward,
+         Movement::Move,
+     )
+@@ -651,7 +655,11 @@ fn move_visual_line_up(cx: &mut Context) {
+ fn move_visual_line_down(cx: &mut Context) {
+     move_impl(
+         cx,
+-        move_vertically_visual,
++        if cx.count.is_some() {
++            move_vertically
++        } else {
++            move_vertically_visual
++        },
+         Direction::Forward,
+         Movement::Move,
+     )
+-- 
+2.43.2
+
