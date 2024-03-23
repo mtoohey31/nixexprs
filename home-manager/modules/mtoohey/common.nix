@@ -538,7 +538,9 @@ let cfg = config.mtoohey.common; in
         };
         nix-index = {
           enable = true;
-          enableFishIntegration = true;
+          enableBashIntegration = false;
+          enableFishIntegration = false;
+          enableZshIntegration = false;
         };
         pistol = {
           enable = true;
