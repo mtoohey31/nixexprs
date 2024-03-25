@@ -36,14 +36,6 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    qbpm = {
-      url = "github:pvsr/qbpm";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "utils";
-        pre-commit-hooks.follows = "";
-      };
-    };
     uncommitted-rs = {
       url = "github:mtoohey31/uncommitted-rs";
       inputs = {

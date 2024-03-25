@@ -1,19 +1,12 @@
-{ firefox-addons, qbpm, config, lib, pkgs, ... }:
+{ firefox-addons, config, lib, pkgs, ... }:
 
 {
   options.mtoohey.gui.enable = lib.mkEnableOption "gui";
 
   config = lib.mkIf config.mtoohey.gui.enable {
-    nixpkgs.overlays = [
-      (final: _: {
-        qbpm = qbpm.packages.${final.system}.default;
-      })
-    ];
-
     home.packages = with pkgs; [
       ibm-plex
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      pkgs.qbpm
       socat
     ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
       noto-fonts
@@ -30,34 +23,6 @@
       configFile."fontconfig/fonts.conf" = lib.mkIf
         pkgs.stdenv.hostPlatform.isLinux
         { source = ./gui/fonts.conf; };
-      dataFile =
-        let
-          qutebrowserPrefix =
-            if pkgs.stdenv.hostPlatform.isDarwin
-            then "${config.home.homeDirectory}/.qutebrowser"
-            else "${config.xdg.configHome}/qutebrowser";
-        in
-        builtins.foldl'
-          (s: name: s // {
-            "qutebrowser-profiles/${name}/config/config.py".text = ''
-              config.load_autoconfig(False);
-              config.source('${qutebrowserPrefix}/config.py')
-            '';
-            "qutebrowser-profiles/${name}/config/greasemonkey".source =
-              config.lib.file.mkOutOfStoreSymlink
-                "${qutebrowserPrefix}/greasemonkey";
-          })
-          { } [ "personal" "gaming" "university" ];
-      desktopEntries = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
-        qbpm = {
-          type = "Application";
-          name = "qbpm";
-          icon = "qutebrowser";
-          exec = "qbpm choose -m ${pkgs.fuzzel}/bin/fuzzel";
-          categories = [ "Network" ];
-          terminal = false;
-        };
-      };
       mimeApps = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
         enable = true;
         defaultApplications = {
@@ -311,129 +276,6 @@
 
           q = "quit";
         };
-      };
-      qutebrowser = {
-        enable = true;
-        keyBindings = {
-          normal = {
-            "D" = "close";
-            "so" = "config-source";
-            "e" = "edit-url";
-            "(" = "jseval --world=main -f ${./gui/qutebrowser/js/slowDown.js}";
-            ")" = "jseval --world=main -f ${./gui/qutebrowser/js/speedUp.js}";
-            "c-" = "jseval --world=main -f ${./gui/qutebrowser/js/zoomOut.js}";
-            "c+" = "jseval --world=main -f ${./gui/qutebrowser/js/zoomIn.js}";
-            "<ESC>" = "fake-key <ESC>";
-            "<Ctrl-Shift-c>" = "yank selection";
-            "v" = "hint all hover";
-            "V" = "mode-enter caret";
-            "<Ctrl-F>" = "hint --rapid all tab-bg";
-            "<Ctrl-e>" = "fake-key <Ctrl-a><Ctrl-c><Ctrl-Shift-e>";
-            "o" = "set statusbar.show always;; cmd-set-text -s :open";
-            "O" = "set statusbar.show always;; cmd-set-text -s :open -t";
-            ":" = "set statusbar.show always;; cmd-set-text :";
-            "/" = "set statusbar.show always;; cmd-set-text /";
-            "ge" = "scroll-to-perc";
-          };
-          command = {
-            "<Escape>" = "mode-enter normal;; set statusbar.show never";
-            "<Return>" = "command-accept;; set statusbar.show never";
-          };
-        };
-        settings =
-          let
-            command_prefix = [
-              "${pkgs.kitty}/bin/kitty"
-              "--override"
-              "macos_quit_when_last_window_closed=yes"
-              "--title"
-              "floatme"
-              "fish"
-              "-c"
-            ];
-          in
-          {
-            auto_save.session = true;
-            colors.webpage.preferred_color_scheme = "dark";
-            completion.height = "25%";
-            content = {
-              fullscreen.window = true;
-              headers.do_not_track = null;
-              javascript.clipboard = "access";
-            };
-            downloads.location = {
-              directory = "${config.home.homeDirectory}";
-              remember = false;
-            };
-            editor.command = command_prefix ++ [ "$EDITOR {file}" ];
-            fileselect = {
-              handler = "external";
-              single_file.command = command_prefix ++ [
-                "lf -command 'map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
-              ];
-              multiple_files.command = command_prefix ++ [
-                "lf -command 'map <enter> \${{echo \\\"$fx\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
-              ];
-              folder.command = command_prefix ++ [
-                "lf -command 'set dironly; map <enter> \${{echo \\\"$f\\\" > {}; lf -remote \\\"send $id quit\\\"}}'"
-              ];
-            };
-            fonts = {
-              default_size = if pkgs.stdenv.hostPlatform.isDarwin then "16pt" else "12pt";
-              default_family = "JetBrainsMono Nerd Font";
-            };
-            fonts.web.family = {
-              standard = "IBM Plex Sans";
-              sans_serif = "IBM Plex Sans";
-              serif = "IBM Plex Serif";
-              fixed = "JetBrainsMono Nerd Font";
-            };
-            hints.chars = "asdfghjkl;qwertyuiopzxcvbnm";
-            statusbar.show = "never";
-            tabs = {
-              background = false;
-              last_close = "close";
-              show = "switching";
-              show_switching_delay = 1500;
-              title.format = "{current_title}";
-            };
-            url = rec {
-              default_page =
-                let
-                  new-tab = ''
-                    <!DOCTYPE html>
-                    <html>
-                      <head>
-                        <title>new tab</title>
-                      </head>
-                      <body style="background: #${(import ../../themes/gruvbox.nix).bg}" />
-                    </html>
-                  '';
-                in
-                "file://${builtins.toFile "new-tab.html" new-tab}";
-              start_pages = default_page;
-            };
-          };
-        extraConfig =
-          let
-            gruvbox-qutebrowser = builtins.fetchurl {
-              url = "https://raw.githubusercontent.com/The-Compiler/dotfiles/master/qutebrowser/gruvbox.py";
-              sha256 = "16v9p81h059mzdvikg4d1dfhbj5v8jqbsgw9yanrpq6cfj7wrx6l";
-            };
-          in
-          ''
-            config.unbind('<Ctrl-v>')
-            config.unbind('<Ctrl-a>')
-            config.source('${gruvbox-qutebrowser}')
-            import json
-          '' + lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
-            c.qt.args = ["single-process"]
-          '' + lib.optionalString (config.programs.fish.shellAliases ? "copy") ''
-            config.bind('yg', 'spawn --userscript ${pkgs.writeShellScript "qute-yank-git" ''
-              set -eo pipefail
-              printf "$QUTE_URL" | sed -E 's/^https?:\/\/github.com\//git@github.com:/;s/ (\/[^/]*)\/.*/\1/' | ${config.programs.fish.shellAliases.copy}
-            ''}')
-          '';
       };
       zathura = {
         enable = true;

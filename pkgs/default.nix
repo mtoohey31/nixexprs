@@ -117,11 +117,6 @@ rec {
       propagatedBuildInputs = [ final.torch ];
     };
   });
-  qutebrowser = pkgs.qutebrowser.override {
-    python3 = pkgs.python3.overrideAttrs (oldAttrs: {
-      passthru = oldAttrs.passthru // { pkgs = python3Packages; };
-    });
-  };
 } // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
   Karabiner-DriverKit-VirtualHIDDevice = callPackage
     ./os-specific/darwin/Karabiner-DriverKit-VirtualHIDDevice

@@ -191,30 +191,6 @@
         "type": "indirect"
       }
     },
-    "qbpm": {
-      "inputs": {
-        "flake-utils": [
-          "utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "pre-commit-hooks": []
-      },
-      "locked": {
-        "lastModified": 1705989832,
-        "narHash": "sha256-JfvbucZK4EKzWJ5Q098yhglMt/nWJIRLFUPhAlv0Fhs=",
-        "owner": "pvsr",
-        "repo": "qbpm",
-        "rev": "89a6357b180a03c5f2c6e5f47437b1b0249eb62c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pvsr",
-        "repo": "qbpm",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "firefox-addons": "firefox-addons",
@@ -224,7 +200,6 @@
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
-        "qbpm": "qbpm",
         "uncommitted-rs": "uncommitted-rs",
         "utils": "utils",
         "vimv2": "vimv2"
