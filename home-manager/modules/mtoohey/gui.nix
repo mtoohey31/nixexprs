@@ -139,6 +139,7 @@
                 "newElementCount": 4
               }
             '';
+            "browser.urlbar.showSearchSuggestionsFirst" = false;
             "datareporting.healthreport.uploadEnabled" = false;
             "extensions.formautofill.addresses.enabled" = false;
             "extensions.formautofill.creditCards.enabled" = false;
