@@ -9,11 +9,11 @@ rec {
   python3Packages = pkgs.python3Packages.overrideScope (final: prev: {
     fugashi = final.buildPythonPackage rec {
       pname = "fugashi";
-      version = "1.2.1";
+      version = "1.3.1";
 
       src = final.fetchPypi {
         inherit pname version;
-        sha256 = "58eupmhABq8iO1FFuWwHHC4QNTr7nfZxLfRFgAPPYtM=";
+        sha256 = "3ycco82iOSnNE8aOoHgTzp+KKxBieQRzNdQcA4zNa5A=";
       };
 
       nativeBuildInputs = [ pkgs.mecab ];
@@ -22,11 +22,11 @@ rec {
     };
     manga-ocr = final.buildPythonPackage rec {
       pname = "manga-ocr";
-      version = "0.1.10";
+      version = "0.1.11";
 
       src = final.fetchPypi {
         inherit pname version;
-        sha256 = "hSJf8bLd9ON9Q8zTqYtOtk1m7SGGKghLrXOYxZdnG8I=";
+        sha256 = "Ic6AaSaEY1NaPHgF9xawj1gmrwWqf1NhmTs8NYKZsOs=";
       };
 
       propagatedBuildInputs = [
@@ -42,29 +42,41 @@ rec {
         final.unidic-lite
       ];
 
-      postInstall = ''
-        cp -r assets $out/lib/python3.10/site-packages/assets
-      '';
+      postInstall =
+        let
+          split = builtins.splitVersion final.python.version;
+          major = builtins.elemAt split 0;
+          minor = builtins.elemAt split 1;
+        in
+        ''
+          cp -r assets $out/lib/python${major}.${minor}/site-packages/assets
+        '';
     };
     mokuro = (final.buildPythonPackage rec {
       pname = "mokuro";
-      version = "0.1.7";
+      version = "0.1.8";
 
       src = final.fetchPypi {
         inherit pname version;
-        sha256 = "BE1EyY955UkrhF8cK2NYExAQ8ieXgrlDyaIPGYab8uo=";
+        sha256 = "c3TZ99g5qW2fJzlr4vGO/Em5w8SrbAmN/CukTDiCT6c=";
       };
 
       propagatedBuildInputs = [
+        final.fire
+        final.loguru
         final.manga-ocr
-        final.opencv4
-        final.scipy
-        final.pyclipper
-        final.yattag
-        final.shapely
         final.natsort
+        final.numpy
+        final.opencv4
+        final.pillow
+        final.pyclipper
+        final.requests
+        final.scipy
+        final.shapely
         final.torchsummary
         final.torchvision
+        final.tqdm
+        final.yattag
       ];
 
       postPatch =
