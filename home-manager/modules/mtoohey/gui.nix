@@ -152,6 +152,7 @@
             "full-screen-api.ignore-widgets" = true;
             "layout.css.prefers-color-scheme.content-override" = 0;
             "media.eme.enabled" = true;
+            "network.protocol-handler.external.mailto" = false;
             "signon.rememberSignons" = false;
             "trailhead.firstrun.didSeeAboutWelcome" = true;
           };
