@@ -273,6 +273,7 @@
 
           L = ''cycle-values loop-file "inf" "no"'';
           f = "cycle fullscreen";
+          a = "cycle audio";
           c = "cycle sub";
           ":" = "cycle osc";
 
