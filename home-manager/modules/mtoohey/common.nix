@@ -575,7 +575,7 @@ let cfg = config.mtoohey.common; in
           enableZshIntegration = true;
           settings =
             let
-              nerd-font-symbols-path = "${pkgs.starship.src}/docs/.vuepress/public/presets/toml/nerd-font-symbols.toml";
+              nerd-font-symbols-path = "${pkgs.starship.src}/docs/public/presets/toml/nerd-font-symbols.toml";
               nerd-font-symbols = builtins.fromTOML (builtins.readFile nerd-font-symbols-path);
             in
             lib.mkMerge [
