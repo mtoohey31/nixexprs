@@ -1,0 +1,29 @@
+--- a/cmd/arc/main.go
++++ b/cmd/arc/main.go
+@@ -7,7 +7,6 @@ import (
+ 	"flag"
+ 	"fmt"
+ 	"os"
+-	"path/filepath"
+ 	"strings"
+ 
+ 	"github.com/klauspost/compress/zip"
+@@ -74,17 +73,7 @@ func main() {
+ 		if !ok {
+ 			fatalf("the archive command does not support the %s format", iface)
+ 		}
+-
+-		var sources []string
+-		for _, src := range flag.Args()[2:] {
+-			srcs, err := filepath.Glob(src)
+-			if err != nil {
+-				fatalf(err.Error())
+-			}
+-			sources = append(sources, srcs...)
+-		}
+-
+-		err = a.Archive(sources, flag.Arg(1))
++		err = a.Archive(flag.Args()[2:], flag.Arg(1))
+ 
+ 	case "unarchive":
+ 		u, ok := iface.(archiver.Unarchiver)
