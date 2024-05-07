@@ -49,12 +49,12 @@
               inherit (firefox-addons.packages.${system}) bitwarden
                 don-t-fuck-with-paste furiganaize gruvbox-dark-theme h264ify
                 multi-account-containers temporary-containers;
-              yomichan = buildFirefoxXpiAddon {
-                pname = "yomichan";
-                version = "22.10.23.0";
-                addonId = "alex.testing@foosoft.net";
-                url = "https://github.com/FooSoft/yomichan/releases/download/22.10.23.0/a708116f79104891acbd-22.10.23.0.xpi";
-                sha256 = "lSGJcgZcZE9bWcAtUeQZ4SyXv5wdbYDLvOFImjvnFa4=";
+              yomitan = buildFirefoxXpiAddon {
+                pname = "yomitan";
+                version = "24.4.16.0";
+                addonId = "{2d13e145-294e-4ead-9bce-b4644b203a00}";
+                url = "https://github.com/themoeway/yomitan/releases/download/24.4.16.0/yomitan-firefox-dev.xpi";
+                sha256 = "uJzADQ2ToRa2OsnB8qmjRMI5ePBsHdPVPl88dn1aKPQ=";
                 meta = { };
               };
             in
@@ -68,9 +68,9 @@
               # NOTE: manually enable "Automatic Mode"
               temporary-containers
               # NOTE: manually install JMDict dictionary from
-              # https://github.com/FooSoft/yomichan/raw/dictionaries/jmdict_english.zip
+              # https://github.com/MarvNC/jmdict-yomitan/releases/latest/download/JMdict_english_with_examples.zip
               # and disable startup notification
-              yomichan
+              yomitan
             ];
           search = {
             default = "DuckDuckGo";
