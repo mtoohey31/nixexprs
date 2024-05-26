@@ -333,6 +333,7 @@ let cfg = config.mtoohey.common; in
             vc = "revert --continue";
             w = "worktree";
             wa = "worktree add";
+            wl = "worktree list";
             wm = "worktree move";
             wp = "worktree prune";
             wx = "worktree remove";
