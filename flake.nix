@@ -36,6 +36,10 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tree-sitter-ott = {
+      url = "github:armonjam/tree-sitter-ott";
+      flake = false;
+    };
     uncommitted-rs = {
       url = "github:mtoohey31/uncommitted-rs";
       inputs = {

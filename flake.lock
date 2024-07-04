@@ -200,6 +200,7 @@
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "tree-sitter-ott": "tree-sitter-ott",
         "uncommitted-rs": "uncommitted-rs",
         "utils": "utils",
         "vimv2": "vimv2"
@@ -242,6 +243,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tree-sitter-ott": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717620442,
+        "narHash": "sha256-ECrbe0hTCnVWEfSipOLwkJYYnaLTk0x1K65AeNNiCxo=",
+        "owner": "armonjam",
+        "repo": "tree-sitter-ott",
+        "rev": "ec3376ac9cd59ef38f2a1e0d8f9af70deef48f2f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "armonjam",
+        "repo": "tree-sitter-ott",
         "type": "github"
       }
     },

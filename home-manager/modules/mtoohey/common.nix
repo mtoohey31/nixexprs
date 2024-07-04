@@ -1,4 +1,4 @@
-{ helix, nixexprs, vimv2, config, lib, pkgs, ... }:
+{ helix, nixexprs, tree-sitter-ott, vimv2, config, lib, pkgs, ... }:
 
 let cfg = config.mtoohey.common; in
 {
@@ -47,12 +47,21 @@ let cfg = config.mtoohey.common; in
 
     home.file.".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
 
-    xdg.configFile."lf/cleaner" = {
-      text = ''
-        #!${pkgs.bash}/bin/sh
-        kitten icat --transfer-mode file --stdin no --clear </dev/null >/dev/tty
-      '';
-      executable = true;
+    xdg.configFile = {
+      "lf/cleaner" = {
+        text = ''
+          #!${pkgs.bash}/bin/sh
+          kitten icat --transfer-mode file --stdin no --clear </dev/null >/dev/tty
+        '';
+        executable = true;
+      };
+      "helix/runtime/grammars/ott.so".source = pkgs.tree-sitter.buildGrammar
+        {
+          language = "ott";
+          version = tree-sitter-ott.shortRev;
+          src = tree-sitter-ott;
+        } + "/parser";
+      "helix/runtime/queries/ott".source = tree-sitter-ott + "/queries";
     };
 
     # TODO: figure out how to set $NIX_PATH in here too so that home-manager
@@ -401,6 +410,22 @@ let cfg = config.mtoohey.common; in
                     # "\left[" = "\right]";
                     # "\left\{" = "\right\}";
                     # "\left|" = "\right|";
+                  };
+                }
+                {
+                  name = "ott";
+                  scope = "source.ott";
+                  injection-regex = "ott";
+                  file-types = [ "ott" ];
+                  comment-token = "%";
+                  indent = { tab-width = 2; unit = "  "; };
+                  auto-pairs = {
+                    "'" = "'";
+                    "(" = ")";
+                    "/" = "/";
+                    "<" = ">";
+                    "[" = "]";
+                    "{" = "}";
                   };
                 }
               ] ++ lib.optional cfg.helix-overlay {
