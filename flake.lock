@@ -249,11 +249,11 @@
     "tree-sitter-ott": {
       "flake": false,
       "locked": {
-        "lastModified": 1717620442,
-        "narHash": "sha256-ECrbe0hTCnVWEfSipOLwkJYYnaLTk0x1K65AeNNiCxo=",
+        "lastModified": 1720144972,
+        "narHash": "sha256-y20HXJ+nChDftcPAh0VaidRkGGZLIo/w4PyxCzGcTJQ=",
         "owner": "armonjam",
         "repo": "tree-sitter-ott",
-        "rev": "ec3376ac9cd59ef38f2a1e0d8f9af70deef48f2f",
+        "rev": "8ab99c5f7dcd5d9f30c08a549d62266a9d75467a",
         "type": "github"
       },
       "original": {
