@@ -56,7 +56,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, utils, ... }@inputs: {
+  outputs = { self, nixpkgs, utils, nix-index-database, ... }@inputs: {
     lib = import ./lib nixpkgs.lib;
 
     darwinModules = self.lib.callModules {
@@ -64,7 +64,9 @@
       inherit inputs;
       selfName = "nixexprs";
     };
-    homeManagerModules = self.lib.callModules {
+    homeManagerModules = {
+      inherit (nix-index-database.hmModules) nix-index;
+    } // self.lib.callModules {
       moduleListPath = ./home-manager/modules/module-list.nix;
       inherit inputs;
       selfName = "nixexprs";
