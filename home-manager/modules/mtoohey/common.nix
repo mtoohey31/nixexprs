@@ -346,6 +346,7 @@ let cfg = config.mtoohey.common; in
             wm = "worktree move";
             wp = "worktree prune";
             wx = "worktree remove";
+            wxx = "worktree remove --force";
             x = "rm";
             xc = "rm --cached";
             xch = "rm --cached .";
