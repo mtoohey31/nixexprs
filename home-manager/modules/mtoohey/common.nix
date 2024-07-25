@@ -468,6 +468,8 @@ let cfg = config.mtoohey.common; in
                 enable = true;
                 wrap-indicator = "  ";
               };
+              end-of-line-diagnostics = "hint";
+              inline-diagnostics.cursor-line = "warning";
             };
             keys = rec {
               select = rec {
