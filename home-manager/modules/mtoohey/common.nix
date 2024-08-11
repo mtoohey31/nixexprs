@@ -473,6 +473,9 @@ let cfg = config.mtoohey.common; in
             };
             keys = rec {
               select = rec {
+                w = "move_next_sub_word_start";
+                b = "move_prev_sub_word_start";
+                e = "move_next_sub_word_end";
                 g.q = ":reflow";
                 G = "goto_last_line";
                 M = "match_brackets";
