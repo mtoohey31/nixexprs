@@ -61,7 +61,12 @@ let cfg = config.mtoohey.common; in
           version = tree-sitter-ott.shortRev;
           src = tree-sitter-ott;
         } + "/parser";
-      "helix/runtime/queries/ott".source = tree-sitter-ott + "/queries";
+      "helix/runtime/queries/ott/highlights.scm".source = tree-sitter-ott + "/queries/highlights.scm";
+      "helix/runtime/queries/ott/injections.scm".text = /* scheme */ ''
+        ((hom_body) @injection.content
+         (#set! injection.language "latex")
+         (#set! injection.include-unnamed-children))
+      '';
     };
 
     # TODO: figure out how to set $NIX_PATH in here too so that home-manager
