@@ -2,7 +2,6 @@ inputs: pkgs:
 let inherit (pkgs) callPackage; in
 {
   archiver = callPackage ./misc/archiver { inherit (pkgs) archiver; };
-  gickup = callPackage ./applications/backup/gickup { };
   kitty = callPackage ./applications/terminal-emulators/kitty {
     inherit (pkgs) kitty;
   };
