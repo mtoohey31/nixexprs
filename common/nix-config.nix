@@ -1,4 +1,4 @@
-{ nixpkgs, pkgs, ... }:
+{ nixpkgs, ... }:
 
 {
   extraOptions = ''
@@ -10,7 +10,6 @@
     options = "--delete-older-than 14d";
   };
   nixPath = [ "nixpkgs=${nixpkgs}" ];
-  package = pkgs.nixFlakes;
   registry.nixpkgs = {
     from = {
       type = "indirect";

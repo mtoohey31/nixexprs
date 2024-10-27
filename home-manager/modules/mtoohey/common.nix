@@ -69,11 +69,9 @@ let cfg = config.mtoohey.common; in
       '';
     };
 
-    # TODO: figure out how to set $NIX_PATH in here too so that home-manager
-    # only consumers still get the in-path nixpkgs version locked to the version
+    # TODO: figure out how to set $NIX_PATH in here so that home-manager only
+    # consumers still get the in-path nixpkgs version locked to the version
     # used for their home config
-
-    nix.package = lib.mkDefault pkgs.nixFlakes;
 
     home.sessionVariables = {
       DIRENV_LOG_FORMAT = "";

@@ -10,7 +10,7 @@
       socat
     ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       nsxiv
       xdg-utils
