@@ -21,6 +21,12 @@
         flake-utils.follows = "utils";
       };
     };
+    ghostty = {
+      url = "git+ssh://git@github.com/ghostty-org/ghostty";
+
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
     helix = {
       url = "github:helix-editor/helix";
       inputs = {

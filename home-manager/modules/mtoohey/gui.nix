@@ -5,6 +5,7 @@
 
   config = lib.mkIf config.mtoohey.gui.enable {
     home.packages = with pkgs; [
+      ghostty
       ibm-plex
       nerd-fonts.jetbrains-mono
       socat
@@ -20,9 +21,22 @@
 
     home.file.Downloads.source = config.lib.file.mkOutOfStoreSymlink config.home.homeDirectory;
     xdg = {
-      configFile."fontconfig/fonts.conf" = lib.mkIf
-        pkgs.stdenv.hostPlatform.isLinux
-        { source = ./gui/fonts.conf; };
+      configFile = {
+        "fontconfig/fonts.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux
+          { source = ./gui/fonts.conf; };
+        "ghostty/config".text = ''
+          adjust-cursor-thickness = 3
+          theme = GruvboxDark
+          window-decoration = false
+          window-padding-balance = true
+          window-padding-x = 8,8
+          window-padding-y = 8,8
+          resize-overlay = never
+          clipboard-read = allow
+          copy-on-select = false
+          confirm-close-surface = false
+        '';
+      };
       mimeApps = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
         enable = true;
         defaultApplications = {
@@ -160,10 +174,10 @@
       };
       fish.functions.ssh = {
         # this is necessary because if $TERM gets inherited but the host we're
-        # ssh'ing into doesn't have terminfo for xterm-kitty (which is common)
+        # ssh'ing into doesn't have terminfo for xterm-ghostty (which is common)
         # then things go very badly
         body = ''
-          if test "$TERM" = "xterm-kitty"
+          if test "$TERM" = "xterm-ghostty"
             TERM=xterm-256color command ssh $argv
           else
             command ssh $argv
@@ -171,62 +185,7 @@
         '';
         wraps = "ssh";
       };
-      kitty = {
-        enable = true;
-        environment.SHLVL = "0";
-        settings = {
-          allow_remote_control = true;
-          confirm_os_window_close = 0;
-          cursor = "none";
-          cursor_blink_interval = 0;
-          cursor_text_color = "background";
-          enable_audio_bell = false;
-          hide_window_decorations = "titlebar-only";
-          macos_option_as_alt = true;
-          remember_window_size = false;
-          scrollback_lines = 10000;
-          touch_scroll_multiplier = 9;
-          update_check_interval = 0;
-          window_padding_width = 8;
-        };
-        keybindings =
-          let
-            kitty-kitten-search = pkgs.fetchFromGitHub {
-              owner = "trygveaa";
-              repo = "kitty-kitten-search";
-              rev = "0760138fad617c5e4159403cbfce8421ccdfe571";
-              sha256 = "egisza7V5dWplRYHIYt4bEQdqXa4E7UhibyWJAup8as=";
-            };
-          in
-          {
-            "ctrl+shift+f" = "launch --location=hsplit --allow-remote-control kitty +kitten ${kitty-kitten-search}/search.py @active-kitty-window-id";
-          };
-        extraConfig =
-          let
-            gruvbox-kitty = builtins.fetchurl {
-              url = "https://raw.githubusercontent.com/wdomitrz/kitty-gruvbox-theme/b930abcc3a1cdcc763fb65988f07ee0270710f9c/gruvbox_dark.conf";
-              sha256 = "1msaz916a7qrsn4dqcygwynanqqm0mw2cpwf18ab7ljn9xzrdnlp";
-            };
-          in
-          ''
-            include ${gruvbox-kitty}
-          '' + (if pkgs.stdenv.hostPlatform.isDarwin then ''
-            font_family JetBrainsMono Nerd Font Mono Regular
-            bold_font JetBrainsMono Nerd Font Mono Bold
-            italic_font JetBrainsMono Nerd Font Mono Italic
-            bold_italic_font JetBrainsMono Nerd Font Mono Bold Italic
-
-            font_size 16
-          '' else ''
-            font_family JetBrains Mono Regular Nerd Font Complete
-            bold_font JetBrains Mono Bold Nerd Font Complete
-            italic_font JetBrains Mono Italic Nerd Font Complete
-            bold_italic_font JetBrains Mono Bold Italic Nerd Font Complete
-
-            font_size 12
-          '');
-      };
-      lf.keybindings.gC = "&${pkgs.kitty-window} --cwd current fish -C lfcd &>/dev/null &";
+      lf.keybindings.gC = "&${pkgs.ghostty}/bin/ghostty -e fish -C lfcd &>/dev/null &";
       mpv = {
         enable = true;
         config = {

@@ -594,11 +594,11 @@ let cfg = config.mtoohey.common; in
             }
             {
               mime = "image/*";
-              command = ''sh: if [ "$TERM" = xterm-kitty ]; then kitten icat --transfer-mode file --stdin no --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% %pistol-filename% </dev/null >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% %pistol-filename%; fi'';
+              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then kitten icat --transfer-mode file --stdin no --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% %pistol-filename% </dev/null >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% %pistol-filename%; fi'';
             }
             {
               mime = "application/pdf";
-              command = ''sh: if [ "$TERM" = xterm-kitty ]; then ${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png | kitten icat --transfer-mode file --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% <(${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png); fi'';
+              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png | kitten icat --transfer-mode file --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% <(${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png); fi'';
             }
           ];
         };
@@ -752,10 +752,10 @@ let cfg = config.mtoohey.common; in
             set -g pane-border-style 'fg=color7,bg=color0'
             set -g pane-active-border-style 'fg=color1,bg=color0'
 
-            %if '#{||:#{==:#{TERM},xterm-kitty},#{==:#{TERM},xterm-256color}}'
+            %if '#{||:#{==:#{TERM},xterm-ghostty},#{==:#{TERM},xterm-256color}}'
             set -g default-terminal "screen-256color"
             %endif
-            set-option -ga terminal-overrides ",xterm-kitty:Tc,xterm-256color:Tc"
+            set-option -ga terminal-overrides ",xterm-ghostty:Tc,xterm-256color:Tc"
           '';
         };
         zsh = {

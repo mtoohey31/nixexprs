@@ -23,12 +23,12 @@
           cmd + shift - l : yabai -m window --swap east || (yabai -m display --focus east && sleep 0.1 && yabai -m window --swap recent && yabai -m window --focus recent)
 
           cmd + shift - tab : yabai -m window --toggle float
-          cmd - return : ${pkgs.kitty-window}
+          cmd - return : ${pkgs.ghostty}/bin/ghostty
 
           cmd + shift - b : yabai -m space --balance
           cmd + shift - y : launchctl kickstart -k gui/501/org.nixos.yabai
 
-          cmd - 0x2C : ${pkgs.kitty-window} fish -C lf
+          cmd - 0x2C : ${pkgs.ghostty}/bin/ghostty -e fish -C lf
           cmd + shift - 0x2C : open ~
         '';
       };

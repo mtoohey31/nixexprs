@@ -2,10 +2,7 @@ inputs: pkgs:
 let inherit (pkgs) callPackage; in
 {
   archiver = callPackage ./misc/archiver { inherit (pkgs) archiver; };
-  kitty = callPackage ./applications/terminal-emulators/kitty {
-    inherit (pkgs) kitty;
-  };
-  kitty-window = callPackage ./applications/terminal-emulators/kitty-window { };
+  ghostty = inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
   python3Packages = pkgs.python3Packages.overrideScope (final: prev: {
     fugashi = final.buildPythonPackage rec {
       pname = "fugashi";
