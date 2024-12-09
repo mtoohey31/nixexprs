@@ -6,7 +6,7 @@
   config = lib.mkIf config.mtoohey.gui.enable {
     home.packages = with pkgs; [
       ibm-plex
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      nerd-fonts.jetbrains-mono
       socat
     ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
       noto-fonts
