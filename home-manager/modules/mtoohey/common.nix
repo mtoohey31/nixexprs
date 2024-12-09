@@ -329,6 +329,7 @@ let cfg = config.mtoohey.common; in
             sh = "status --short .";
             ssh = "!git remote set-url origin $(git remote get-url origin | sed -E 's,^https?://([^/]+)/,git@\\1:,')";
             t = "stash push --include-untracked --keep-index";
+            ta = "stash apply";
             td = "stash drop";
             tl = "stash list";
             tp = "stash pop";
