@@ -227,6 +227,22 @@
         "type": "indirect"
       }
     },
+    "restore-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1732385295,
+        "narHash": "sha256-yjjmy96tg10s+PSzPlL/BdyUUXwI0u+U00COrLwX8WI=",
+        "owner": "boydaihungst",
+        "repo": "restore.yazi",
+        "rev": "e9b6e8ecabb5afba433c2425b3b40682bc2841da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "boydaihungst",
+        "repo": "restore.yazi",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "firefox-addons": "firefox-addons",
@@ -237,10 +253,13 @@
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "restore-yazi": "restore-yazi",
+        "starship-yazi": "starship-yazi",
         "tree-sitter-ott": "tree-sitter-ott",
         "uncommitted-rs": "uncommitted-rs",
         "utils": "utils",
-        "vimv2": "vimv2"
+        "vimv2": "vimv2",
+        "yazi-plugins": "yazi-plugins"
       }
     },
     "rust-overlay": {
@@ -261,6 +280,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "starship-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1732979864,
+        "narHash": "sha256-0J6hxcdDX9b63adVlNVWysRR5htwAtP5WhIJ2AK2+Gs=",
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
+        "rev": "247f49da1c408235202848c0897289ed51b69343",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
         "type": "github"
       }
     },
@@ -372,6 +407,22 @@
       "original": {
         "owner": "mtoohey31",
         "repo": "vimv2",
+        "type": "github"
+      }
+    },
+    "yazi-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733962089,
+        "narHash": "sha256-PSVzjC1sdaIOtK5ave4kn3Ck8YwpjO3N9uV/WE6Skdo=",
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "rev": "62f078905b4de55f19e328452c8a1f889ff2f6f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yazi-rs",
+        "repo": "plugins",
         "type": "github"
       }
     },

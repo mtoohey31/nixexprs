@@ -1,4 +1,15 @@
-{ helix, nixexprs, tree-sitter-ott, vimv2, config, lib, pkgs, ... }:
+{ config
+, helix
+, lib
+, nixexprs
+, pkgs
+, restore-yazi
+, starship-yazi
+, tree-sitter-ott
+, vimv2
+, yazi-plugins
+, ...
+}:
 
 let cfg = config.mtoohey.common; in
 {
@@ -48,13 +59,6 @@ let cfg = config.mtoohey.common; in
     home.file.".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
 
     xdg.configFile = {
-      "lf/cleaner" = {
-        text = ''
-          #!${pkgs.bash}/bin/sh
-          kitten icat --transfer-mode file --stdin no --clear </dev/null >/dev/tty
-        '';
-        executable = true;
-      };
       "helix/runtime/grammars/ott.so".source = pkgs.tree-sitter.buildGrammar
         {
           language = "ott";
@@ -135,20 +139,6 @@ let cfg = config.mtoohey.common; in
             lsta = "eza -aT --icons --group-directories-first";
           };
           functions = {
-            lfcd = {
-              body = ''
-                set tmp (mktemp)
-                lf -last-dir-path=$tmp $argv
-                if test -f "$tmp"
-                    set dir (cat $tmp)
-                    command rm -f $tmp
-                    if test -d "$dir"
-                        cd $dir
-                    end
-                end
-              '';
-              wraps = "lf";
-            };
             mv = {
               body = ''
                 if test (count $argv) -ge 2 -a ! -d "$argv[-1]" -a -e "$argv[-1]"
@@ -157,6 +147,16 @@ let cfg = config.mtoohey.common; in
                 command mv $argv
               '';
               wraps = "mv";
+            };
+            yazicd = {
+              body = ''
+                set tmp (mktemp -t "yazi-cwd.XXXXXX")
+                yazi $argv --cwd-file="$tmp"
+                if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+                    builtin cd -- "$cwd"
+                end
+                rm -f -- "$tmp"
+              '';
             };
           };
           shellInit =
@@ -195,7 +195,7 @@ let cfg = config.mtoohey.common; in
             bind -s -M visual e forward-single-char forward-word backward-char
             bind -s -M visual E forward-bigword backward-char
 
-            bind -s -M insert \cf 'set old_tty (${stty} -g); ${stty} sane; lfcd; ${stty} $old_tty; commandline -f repaint'
+            bind -s -M insert \cf 'set old_tty (${stty} -g); ${stty} sane; yazicd; ${stty} $old_tty; commandline -f repaint'
             bind -s -M insert \cl '${if pkgs.stdenv.hostPlatform.isDarwin then "/usr/bin/tput reset" else "tput reset"}; if test -n "$TMUX"; tmux clear-history; else; printf "\e[5 q"; end; commandline -f repaint'
 
             set fish_cursor_default block
@@ -514,94 +514,11 @@ let cfg = config.mtoohey.common; in
             };
           };
         };
-        lf = {
-          enable = true;
-          commands = {
-            archive = ''%echo "\"$fx\"" | string join '" "' | xargs arc archive "$argv" && lf -remote "send $id select \"$argv\""'';
-            chmod = ''%echo "\"$fx\"" | string join '" "' | xargs chmod "$argv"; lf -remote "send $id reload"'';
-            edit = ''
-              ''${{
-                  $EDITOR -- "$argv"
-                  if test -e "$argv"
-                      lf -remote "send $id select \"$argv\""
-                  end
-              }}
-            '';
-            mkdir = ''
-              %{{
-                  mkdir -p -- "$argv"
-                  lf -remote "send $id select \"$argv\""
-              }}
-            '';
-            touch = ''
-              %{{
-                  touch "$argv"
-                  lf -remote "send $id select \"$argv\""
-              }}
-            '';
-          };
-          extraConfig = ''
-            set cleaner ${config.xdg.configHome}/lf/cleaner
-          '';
-          keybindings = {
-            "<esc>" = "clear";
-            C = "push :chmod<space>";
-            D = ''%echo "\"$fx\"" | string join '" "' | xargs trash'';
-            E = "push :edit<space>";
-            M = "push :mkdir<space>";
-            R = "rename";
-            X = ''push :archive<space>'';
-            ge = "bottom";
-            gi = "cd ~/repos/infra";
-            gr = "cd ~/repos";
-            r = "reload";
-            t = "push :touch<space>";
-            u = "%{{ ${trash-undo} }}";
-            x = ''%arc unarchive "$f"'';
-          };
-          previewer.source = pkgs.writeShellScript "lf-previewer" ''
-            ${pkgs.pistol}/bin/pistol "$@"
-
-            # this prevents caching, which is desirable so that previews are
-            # redrawn when the window is resized
-            exit 1
-          '';
-          settings = {
-            dirfirst = false;
-            icons = true;
-            promptfmt = ''\033[1;33m%u\033[0m in \033[1;36m%d\033[0m\033[1m%f\033[0m'';
-            smartcase = true;
-            shell = "fish";
-            scrolloff = 7;
-            period = 1;
-          };
-        };
         nix-index = {
           enable = true;
           enableBashIntegration = false;
           enableFishIntegration = false;
           enableZshIntegration = false;
-        };
-        pistol = {
-          enable = true;
-          associations = [
-            {
-              mime = "text/*";
-              command = "bat --paging=never --color=always --style=auto --wrap=character --terminal-width=%pistol-extra0% --line-range=1:%pistol-extra1% %pistol-filename%";
-            }
-            {
-              mime = "application/json";
-              command = "bat --paging=never --color=always --style=auto --wrap=character --terminal-width=%pistol-extra0% --line-range=1:%pistol-extra1% %pistol-filename%";
-            }
-            {
-              mime = "image/*";
-              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then kitten icat --transfer-mode file --stdin no --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% %pistol-filename% </dev/null >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% %pistol-filename%; fi'';
-            }
-            {
-              mime = "application/pdf";
-              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png | kitten icat --transfer-mode file --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% <(${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png); fi'';
-            }
-          ];
         };
         readline = {
           enable = true;
@@ -758,6 +675,65 @@ let cfg = config.mtoohey.common; in
             %endif
             set-option -ga terminal-overrides ",xterm-ghostty:Tc,xterm-256color:Tc"
           '';
+        };
+        yazi = {
+          enable = true;
+          initLua = ''
+            require("starship"):setup()
+          '';
+          keymap.manager.prepend_keymap = [
+            {
+              on = "C";
+              run = "plugin chmod";
+              desc = "Chmod on selected files";
+            }
+            {
+              on = "f";
+              run = "plugin jump-to-char";
+              desc = "Jump to char";
+            }
+            {
+              on = [ "g" "c" ];
+              run = "cd ~/courses";
+              desc = "Go to the courses directory";
+            }
+            {
+              on = [ "g" "C" ];
+              run = "shell --confirm --orphan 'ghostty -e fish -C yazicd'";
+              desc = "Clone window";
+            }
+            {
+              on = [ "g" "e" ];
+              run = "arrow 99999999";
+              desc = "Move cursor to the bottom";
+            }
+            {
+              on = [ "g" "i" ];
+              run = "cd ~/repos/infra";
+              desc = "Go to the infra directory";
+            }
+            {
+              on = [ "g" "r" ];
+              run = "cd ~/repos";
+              desc = "Go to the repos directory";
+            }
+            {
+              on = "u";
+              run = "plugin restore";
+              desc = "Restore last deleted files/folders";
+            }
+          ];
+          plugins = {
+            chmod = yazi-plugins + "/chmod.yazi";
+            jump-to-char = yazi-plugins + "/jump-to-char.yazi";
+            restore = restore-yazi;
+            starship = starship-yazi;
+          };
+          settings.manager = {
+            ratio = [ 1 2 3 ];
+            sort_dir_first = false;
+            scrolloff = 7;
+          };
         };
         zsh = {
           inherit (config.programs.fish) shellAliases;
