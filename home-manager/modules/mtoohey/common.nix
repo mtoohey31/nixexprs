@@ -722,6 +722,10 @@ let cfg = config.mtoohey.common; in
               run = "plugin restore";
               desc = "Restore last deleted files/folders";
             }
+            {
+              on = "z";
+              run = "noop";
+            }
           ];
           plugins = {
             chmod = yazi-plugins + "/chmod.yazi";
