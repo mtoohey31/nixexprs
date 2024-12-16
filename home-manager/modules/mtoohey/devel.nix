@@ -7,7 +7,7 @@
     {
       nixpkgs.overlays = [ uncommitted-rs.overlays.default ];
 
-      home.packages = with pkgs; [ nil pkgs.uncommitted-rs watchexec ];
+      home.packages = with pkgs; [ nil pkgs.uncommitted-rs vscodium watchexec ];
 
       programs = {
         bash.enable = true;
