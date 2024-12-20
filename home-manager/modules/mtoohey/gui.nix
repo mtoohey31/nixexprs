@@ -25,6 +25,7 @@
         "fontconfig/fonts.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux
           { source = ./gui/fonts.conf; };
         "ghostty/config".text = ''
+          font-feature = -dlig
           adjust-cursor-thickness = 3
           theme = GruvboxDark
           window-decoration = false
