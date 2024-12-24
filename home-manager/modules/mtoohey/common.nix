@@ -410,11 +410,6 @@ let cfg = config.mtoohey.common; in
                     # "__" = "__";
                     # "**" = "**";
                     # "```" = "```";
-                    # "\{" = "\}";
-                    # "\left(" = "\right)";
-                    # "\left[" = "\right]";
-                    # "\left\{" = "\right\}";
-                    # "\left|" = "\right|";
                   };
                 }
                 {
