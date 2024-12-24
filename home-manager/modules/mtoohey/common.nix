@@ -2,6 +2,7 @@
 , helix
 , lib
 , nixexprs
+, nixpkgs
 , pkgs
 , restore-yazi
 , starship-yazi
@@ -73,15 +74,12 @@ let cfg = config.mtoohey.common; in
       '';
     };
 
-    # TODO: figure out how to set $NIX_PATH in here so that home-manager only
-    # consumers still get the in-path nixpkgs version locked to the version
-    # used for their home config
-
     home.sessionVariables = {
       DIRENV_LOG_FORMAT = "";
       GOPATH = "${config.home.homeDirectory}/.go";
       LESS = "-Ri --incsearch";
       LS_COLORS = "";
+      NIX_PATH = "nixpkgs=${nixpkgs}";
       SHELL = "${pkgs.fish}/bin/fish";
     };
     programs =
