@@ -5,10 +5,10 @@ lib: {
         builtins.removeAttrs inputs [ "self" ] // { ${selfName} = inputs.self; };
       fromModulePath = modulePath: {
         name = lib.removeSuffix ".nix" (builtins.baseNameOf modulePath);
+        # deadnix: skip
         value = { config, lib, pkgs, ... }@moduleInputs:
           import modulePath (
             inputsWithRenamedSelf //
-            { inherit config lib pkgs; } // # this is here to please deadnix
             moduleInputs
           );
       };
