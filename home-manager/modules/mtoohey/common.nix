@@ -672,6 +672,7 @@ let cfg = config.mtoohey.common; in
         yazi = {
           enable = true;
           initLua = ''
+            require("jump-to-char"):setup(true)
             require("starship"):setup()
           '';
           keymap.manager.prepend_keymap = [
@@ -722,7 +723,8 @@ let cfg = config.mtoohey.common; in
           ];
           plugins = {
             chmod = yazi-plugins + "/chmod.yazi";
-            jump-to-char = yazi-plugins + "/jump-to-char.yazi";
+            # TODO: Switch this back to upstream once it supports smartcase.
+            jump-to-char = ./common/jump-to-char.yazi;
             restore = restore-yazi;
             starship = starship-yazi;
           };
