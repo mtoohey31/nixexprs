@@ -384,12 +384,8 @@ let cfg = config.mtoohey.common; in
                 };
               in
               [
-                (addFiletypes "json" [ "flake.lock" "tfstate" ])
-                (addFiletypes "toml" [ "Cargo.lock" ])
-                {
-                  name = "nix";
-                  auto-format = true;
-                }
+                (addFiletypes "json" [ "tfstate" ])
+                { name = "nix"; auto-format = true; }
                 { name = "haskell"; auto-format = true; }
                 {
                   name = "markdown";
@@ -398,16 +394,8 @@ let cfg = config.mtoohey.common; in
                     "*" = "*";
                     "`" = "`";
                     "$" = "$";
-                    "<" = ">";
                     "(" = ")";
                     "[" = "]";
-                    "{" = "}";
-                    "|" = "|";
-                    # TODO: implement support for multi-character auto-pairs, see:
-                    # https://github.com/helix-editor/helix/issues/4035
-                    # "__" = "__";
-                    # "**" = "**";
-                    # "```" = "```";
                   };
                 }
                 {
