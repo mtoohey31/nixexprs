@@ -716,10 +716,13 @@ let cfg = config.mtoohey.common; in
             restore = restore-yazi;
             starship = starship-yazi;
           };
-          settings.manager = {
-            ratio = [ 1 2 3 ];
-            sort_dir_first = false;
-            scrolloff = 7;
+          settings = {
+            manager = {
+              ratio = [ 1 2 3 ];
+              sort_dir_first = false;
+              scrolloff = 7;
+            };
+            tasks.suppress_preload = true;
           };
         };
         zsh = {
