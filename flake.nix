@@ -47,14 +47,6 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    restore-yazi = {
-      url = "github:boydaihungst/restore.yazi";
-      flake = false;
-    };
-    starship-yazi = {
-      url = "github:Rolv-Apneseth/starship.yazi";
-      flake = false;
-    };
     tree-sitter-ott = {
       url = "github:armonjam/tree-sitter-ott";
       flake = false;
@@ -72,10 +64,6 @@
         nixpkgs.follows = "nixpkgs";
         utils.follows = "utils";
       };
-    };
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
     };
   };
 

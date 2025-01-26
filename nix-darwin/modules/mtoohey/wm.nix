@@ -28,7 +28,7 @@
           cmd + shift - b : yabai -m space --balance
           cmd + shift - y : launchctl kickstart -k gui/501/org.nixos.yabai
 
-          cmd - 0x2C : ${pkgs.ghostty}/bin/ghostty -e fish -C yazicd
+          cmd - 0x2C : ${pkgs.ghostty}/bin/ghostty -e fish -C lfcd
           cmd + shift - 0x2C : open ~
         '';
       };
