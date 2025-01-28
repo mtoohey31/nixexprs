@@ -51,7 +51,7 @@ let cfg = config.mtoohey.common; in
       "lf/cleaner" = {
         text = ''
           #!${pkgs.bash}/bin/sh
-          kitten icat --transfer-mode file --stdin no --clear </dev/null >/dev/tty
+          ${pkgs.kitty}/bin/kitten icat --transfer-mode file --stdin no --clear </dev/null >/dev/tty
         '';
         executable = true;
       };
@@ -575,11 +575,11 @@ let cfg = config.mtoohey.common; in
             }
             {
               mime = "image/*";
-              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then kitten icat --transfer-mode file --stdin no --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% %pistol-filename% </dev/null >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% %pistol-filename%; fi'';
+              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.kitty}/bin/kitten icat --transfer-mode file --stdin no --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% %pistol-filename% </dev/null >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% %pistol-filename%; fi'';
             }
             {
               mime = "application/pdf";
-              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png | kitten icat --transfer-mode file --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% <(${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png); fi'';
+              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png | ${pkgs.kitty}/bin/kitten icat --transfer-mode file --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% <(${pkgs.poppler_utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png); fi'';
             }
           ];
         };
