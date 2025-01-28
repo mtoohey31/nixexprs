@@ -433,7 +433,7 @@ let cfg = config.mtoohey.common; in
                 normal = "block";
                 select = "underline";
               };
-              rulers = [ 80 100 120 160 ];
+              rulers = [ 80 100 120 ];
               indent-guides.render = true;
               statusline = {
                 left = [
