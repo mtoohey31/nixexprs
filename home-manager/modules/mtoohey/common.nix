@@ -34,11 +34,11 @@ let cfg = config.mtoohey.common; in
     ];
 
     home.packages = with pkgs; [
-      archiver
       comma
       eza
       fd
       jq
+      libarchive
       ripgrep
       trash-cli
       pkgs.vimv2
@@ -497,7 +497,7 @@ let cfg = config.mtoohey.common; in
         lf = {
           enable = true;
           commands = {
-            archive = ''%echo "\"$fx\"" | string join '" "' | xargs arc archive "$argv" && lf -remote "send $id select \"$argv\""'';
+            archive = ''%echo "\"$fx\"" | string join '" "' | xargs bsdtar cf "$argv" && lf -remote "send $id select \"$argv\""'';
             chmod = ''%echo "\"$fx\"" | string join '" "' | xargs chmod "$argv"; lf -remote "send $id reload"'';
             edit = ''
               ''${{
@@ -537,7 +537,9 @@ let cfg = config.mtoohey.common; in
             r = "reload";
             t = "push :touch<space>";
             u = "%{{ ${trash-undo} }}";
-            x = ''%arc unarchive "$f"'';
+            # TODO: Add support for --one-top-level to bsdtar:
+            # https://github.com/libarchive/libarchive/issues/2354
+            x = ''%bsdtar xf "$f"'';
           };
           previewer.source = pkgs.writeShellScript "lf-previewer" ''
             ${pkgs.pistol}/bin/pistol "$@"

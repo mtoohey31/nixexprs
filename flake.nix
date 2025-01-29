@@ -26,7 +26,8 @@
       };
     };
     ghostty = {
-      url = "github:ghostty-org/ghostty";
+      # TODO: Unpin this once the pango issue is properly resolved.
+      url = "github:ghostty-org/ghostty/v1.0.1";
       inputs = {
         nixpkgs-stable.follows = "nixpkgs";
         nixpkgs-unstable.follows = "nixpkgs";
