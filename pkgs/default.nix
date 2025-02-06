@@ -126,10 +126,6 @@ let inherit (pkgs) callPackage; in
     };
   });
 } // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
-  Karabiner-DriverKit-VirtualHIDDevice = callPackage
-    ./os-specific/darwin/Karabiner-DriverKit-VirtualHIDDevice
-    { Karabiner-DriverKit-VirtualHIDDevice-src = inputs.kmonad + "/../c_src/mac/Karabiner-DriverKit-VirtualHIDDevice"; };
-  kmonad-daemon-shim = callPackage ./os-specific/darwin/kmonad-daemon-shim { };
   yabai = callPackage ./os-specific/darwin/yabai {
     inherit (pkgs) yabai;
   };
