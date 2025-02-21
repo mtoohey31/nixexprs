@@ -1,4 +1,14 @@
-{ config, helix, lib, nixexprs, nixpkgs, pkgs, tree-sitter-ott, vimv2, ... }:
+{ config
+, helix
+, lib
+, nixexprs
+, nixpkgs
+, pkgs
+, squish
+, tree-sitter-ott
+, vimv2
+, ...
+}:
 
 let cfg = config.mtoohey.common; in
 {
@@ -30,6 +40,7 @@ let cfg = config.mtoohey.common; in
         })
     ] ++ [
       nixexprs.overlays.default
+      squish.overlays.default
       vimv2.overlays.default
     ];
 
@@ -38,8 +49,8 @@ let cfg = config.mtoohey.common; in
       eza
       fd
       jq
-      libarchive
       ripgrep
+      pkgs.squish
       trash-cli
       pkgs.vimv2
       wget
@@ -497,7 +508,7 @@ let cfg = config.mtoohey.common; in
         lf = {
           enable = true;
           commands = {
-            archive = ''%echo "\"$fx\"" | string join '" "' | xargs bsdtar cf "$argv" && lf -remote "send $id select \"$argv\""'';
+            archive = ''%echo "\"$fx\"" | string join '" "' | xargs squish create "$argv" && lf -remote "send $id select \"$argv\""'';
             chmod = ''%echo "\"$fx\"" | string join '" "' | xargs chmod "$argv"; lf -remote "send $id reload"'';
             edit = ''
               ''${{
@@ -537,9 +548,7 @@ let cfg = config.mtoohey.common; in
             r = "reload";
             t = "push :touch<space>";
             u = "%{{ ${trash-undo} }}";
-            # TODO: Add support for --one-top-level to bsdtar:
-            # https://github.com/libarchive/libarchive/issues/2354
-            x = ''%bsdtar xf "$f"'';
+            x = ''%squish extract "$f"'';
           };
           previewer.source = pkgs.writeShellScript "lf-previewer" ''
             ${pkgs.pistol}/bin/pistol "$@"

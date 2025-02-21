@@ -289,6 +289,7 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
+        "squish": "squish",
         "tree-sitter-ott": "tree-sitter-ott",
         "uncommitted-rs": "uncommitted-rs",
         "utils": "utils",
@@ -313,6 +314,31 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "squish": {
+      "inputs": {
+        "flake-utils": [
+          "utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1740160918,
+        "narHash": "sha256-92i31EBgTEMKkVA14cov0EaSUdWC3QrtMt+J7CTmArc=",
+        "owner": "mtoohey31",
+        "repo": "squish",
+        "rev": "63e91e3644ae03c15aaf55d220156d63939953d8",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix",
+        "owner": "mtoohey31",
+        "repo": "squish",
         "type": "github"
       }
     },

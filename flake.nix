@@ -43,6 +43,13 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    squish = {
+      url = "github:mtoohey31/squish?dir=nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "utils";
+      };
+    };
     tree-sitter-ott = {
       url = "github:armonjam/tree-sitter-ott";
       flake = false;
