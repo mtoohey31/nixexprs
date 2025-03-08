@@ -127,12 +127,9 @@ let cfg = config.mtoohey.common; in
             da = "direnv allow";
             dn = "direnv deny";
             dr = "direnv reload";
-            dx = "echo /.envrc >> .git/info/exclude";
             g = "git";
             pcp = "rsync -r --info=progress2";
             rm = "trash";
-            uf = "echo use flake >> .envrc && direnv allow";
-            ufi = "echo use flake \\~/repos/infra# >> .envrc && direnv allow";
           };
           shellAliases = shellAbbrs // {
             inherit trash-undo;
