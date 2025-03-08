@@ -31,12 +31,11 @@ let cfg = config.mtoohey.common; in
       helix.overlays.default
       (_: prev:
         let inherit (prev) helix; in {
-          helix = helix.passthru.wrapper (helix.unwrapped.overrideAttrs
-            (oldAttrs: {
-              patches = (oldAttrs.patches or [ ]) ++ [
-                ./common/only-move-vertically-visually-without-count.patch
-              ];
-            }));
+          helix = helix.overrideAttrs (oldAttrs: {
+            patches = oldAttrs.patches or [ ] ++ [
+              ./common/only-move-vertically-visually-without-count.patch
+            ];
+          });
         })
     ] ++ [
       nixexprs.overlays.default
@@ -378,11 +377,7 @@ let cfg = config.mtoohey.common; in
           languages = {
             language =
               let
-                helix-src =
-                  if cfg.helix-overlay
-                  then pkgs.helix.unwrapped.src
-                  else pkgs.helix.src;
-                langFilename = "${helix-src}/languages.toml";
+                langFilename = "${pkgs.helix.src}/languages.toml";
                 langData = builtins.fromTOML (builtins.readFile langFilename);
                 defaultFileTypes = language: (lib.lists.findFirst
                   (lang: lang.name == language)
@@ -424,10 +419,11 @@ let cfg = config.mtoohey.common; in
                     "{" = "}";
                   };
                 }
-              ] ++ lib.optional cfg.helix-overlay {
-                name = "typst";
-                auto-format = true;
-              };
+                {
+                  name = "typst";
+                  auto-format = true;
+                }
+              ];
             language-server.nil.config.nil.formatting.command = [
               "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
             ];

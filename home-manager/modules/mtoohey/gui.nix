@@ -57,7 +57,7 @@
       firefox = {
         enable = !pkgs.stdenv.hostPlatform.isDarwin;
         profiles.default = {
-          extensions =
+          extensions.packages =
             let
               inherit (pkgs.stdenv.hostPlatform) system;
               inherit (firefox-addons.lib.${system}) buildFirefoxXpiAddon;
