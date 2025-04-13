@@ -88,16 +88,16 @@
               yomitan
             ];
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             engines = {
               "Amazon.ca".metaData.hidden = true;
-              "Bing".metaData.hidden = true;
-              "eBay".metaData.hidden = true;
-              "Google".metaData.hidden = true;
-              "Wikipedia (en)".metaData.hidden = true;
+              "bing".metaData.hidden = true;
+              "ebay".metaData.hidden = true;
+              "google".metaData.hidden = true;
+              "wikipedia".metaData.hidden = true;
             };
             force = true;
-            order = [ "DuckDuckGo" ];
+            order = [ "ddg" ];
           };
           settings = {
             "app.shield.optoutstudies.enabled" = false;
