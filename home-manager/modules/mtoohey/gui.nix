@@ -63,7 +63,7 @@
               inherit (firefox-addons.lib.${system}) buildFirefoxXpiAddon;
               inherit (firefox-addons.packages.${system}) bitwarden
                 don-t-fuck-with-paste furiganaize gruvbox-dark-theme h264ify
-                multi-account-containers temporary-containers;
+                multi-account-containers seventv temporary-containers;
               yomitan = buildFirefoxXpiAddon {
                 pname = "yomitan";
                 version = "24.4.16.0";
@@ -80,6 +80,7 @@
               gruvbox-dark-theme
               h264ify
               multi-account-containers
+              seventv
               # NOTE: manually enable "Automatic Mode"
               temporary-containers
               # NOTE: manually install JMDict dictionary from
