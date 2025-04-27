@@ -215,6 +215,10 @@
 
           "(" = "add speed -0.25";
           ")" = "add speed +0.25";
+          "<" = "add sub-delay -0.25";
+          ">" = "add sub-delay +0.25";
+          "-" = "add video-zoom -0.1";
+          "+" = "add video-zoom +0.1";
 
           n = "playlist-next";
           N = "playlist-prev";
