@@ -25,8 +25,8 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
       inputs = {
-        nixpkgs-stable.follows = "nixpkgs";
-        nixpkgs-unstable.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "utils";
       };
     };
     helix = {
