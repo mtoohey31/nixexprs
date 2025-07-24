@@ -1,6 +1,8 @@
 { config
 , helix
+, lean-hx
 , lib
+, mattwparas-helix-config
 , nixexprs
 , nixpkgs
 , pkgs
@@ -55,7 +57,10 @@ let cfg = config.mtoohey.common; in
       wget
     ];
 
-    home.file.".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
+    home.file = {
+      ".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
+      ".steel/cogs/mattwparas-helix-package".source = mattwparas-helix-config;
+    };
 
     xdg.configFile = {
       "lf/cleaner" = {
@@ -65,6 +70,14 @@ let cfg = config.mtoohey.common; in
         '';
         executable = true;
       };
+      "helix/cogs/lean.hx".source = lean-hx;
+      "helix/helix.scm".text = /* scheme */ ''
+        (require "cogs/lean.hx/main.scm")
+        (provide lean-unicode)
+      '';
+      "helix/init.scm".text = /* scheme */ ''
+        (require "cogs/lean.hx/keymap.scm")
+      '';
       "helix/runtime/grammars/ott.so".source = pkgs.tree-sitter.buildGrammar
         {
           language = "ott";

@@ -109,15 +109,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1752196485,
-        "narHash": "sha256-lZfS2eNoykbgNzv/bbp1JCed5YucBKjif4df5nTZt6M=",
-        "owner": "helix-editor",
+        "lastModified": 1752805253,
+        "narHash": "sha256-k8aXSXykNhzjllsJGQI2w4/QF6+uKSkYGbXjwFIvJww=",
+        "owner": "mtoohey31",
         "repo": "helix",
-        "rev": "ba04f538300735d267cbf7ec1a225abcdac3c724",
+        "rev": "dfefcad28d7fcb472fb2078837cd1535312ef257",
         "type": "github"
       },
       "original": {
-        "owner": "helix-editor",
+        "owner": "mtoohey31",
+        "ref": "lean.hx",
         "repo": "helix",
         "type": "github"
       }
@@ -139,6 +140,40 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "lean-hx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753499038,
+        "narHash": "sha256-8R6rdXmF3nZgpIhoQpahjH2x8ElOSgZi5ghaX+Q1mP4=",
+        "ref": "refs/heads/main",
+        "rev": "a189152daaaf465a4663b5a81be1a7d2cd1d35af",
+        "revCount": 4,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/mtoohey31/lean.hx"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/mtoohey31/lean.hx"
+      }
+    },
+    "mattwparas-helix-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750629192,
+        "narHash": "sha256-1g9j8M9JBiVnQb/pEmKNJ1lXfEPJpUScVk5RTV85bwM=",
+        "owner": "mattwparas",
+        "repo": "helix-config",
+        "rev": "b651bde993a2b2f588d4c9de3ec02f21c66e976b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattwparas",
+        "repo": "helix-config",
         "type": "github"
       }
     },
@@ -246,6 +281,8 @@
         "ghostty": "ghostty",
         "helix": "helix",
         "home-manager": "home-manager",
+        "lean-hx": "lean-hx",
+        "mattwparas-helix-config": "mattwparas-helix-config",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",

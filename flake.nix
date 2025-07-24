@@ -30,8 +30,16 @@
       };
     };
     helix = {
-      url = "github:helix-editor/helix";
+      url = "github:mtoohey31/helix/lean.hx";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lean-hx = {
+      url = "git+https://github.com/mtoohey31/lean.hx?submodules=1";
+      flake = false;
+    };
+    mattwparas-helix-config = {
+      url = "github:mattwparas/helix-config";
+      flake = false;
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
