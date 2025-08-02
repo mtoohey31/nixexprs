@@ -113,6 +113,7 @@
             "browser.newtabpage.extensionControlled" = true;
             "browser.places.importBookmarksHTML" = true;
             "browser.startup.page" = 3;
+            "browser.startup.homepage" = "chrome://browser/content/blanktab.html";
             "browser.tabs.firefox-view" = false;
             "browser.toolbars.bookmarks.visibility" = "never";
             "browser.uiCustomization.state" = /* json */ ''
