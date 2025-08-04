@@ -571,6 +571,7 @@ let cfg = config.mtoohey.common; in
             shell = "fish";
             scrolloff = 7;
             period = 1;
+            showbinds = false;
           };
         };
         nix-index = {
