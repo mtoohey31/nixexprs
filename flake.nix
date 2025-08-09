@@ -102,7 +102,7 @@
         selfName = "nixexprs";
       };
       homeManagerModules = {
-        inherit (nix-index-database.hmModules) nix-index;
+        inherit (nix-index-database.homeModules) nix-index;
       } // self.lib.callModules {
         moduleListPath = ./home-manager/modules/module-list.nix;
         inherit inputs;
