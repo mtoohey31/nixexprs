@@ -146,11 +146,11 @@
     "lean-hx": {
       "flake": false,
       "locked": {
-        "lastModified": 1753499038,
-        "narHash": "sha256-8R6rdXmF3nZgpIhoQpahjH2x8ElOSgZi5ghaX+Q1mP4=",
+        "lastModified": 1756862507,
+        "narHash": "sha256-bmE0L+mpbdS0N4ij8GoZIV4nbdrQAgVoFiz6VWkjmJw=",
         "ref": "refs/heads/main",
-        "rev": "a189152daaaf465a4663b5a81be1a7d2cd1d35af",
-        "revCount": 4,
+        "rev": "2ee090d66b6d2b66db3e176571bda89976cc5950",
+        "revCount": 5,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/mtoohey31/lean.hx"
