@@ -27,7 +27,7 @@
         "ghostty/config".text = ''
           font-feature = -dlig
           adjust-cursor-thickness = 3
-          theme = GruvboxDark
+          theme = Gruvbox Dark
           window-decoration = false
           window-padding-balance = true
           window-padding-x = 8,8

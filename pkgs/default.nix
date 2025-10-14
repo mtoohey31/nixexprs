@@ -1,7 +1,6 @@
-inputs: pkgs:
+pkgs:
 let inherit (pkgs) callPackage; in
 {
-  ghostty = inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
   python3Packages = pkgs.python3Packages.overrideScope (final: prev: {
     fugashi = final.buildPythonPackage rec {
       pname = "fugashi";

@@ -22,13 +22,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "utils";
-      };
-    };
     helix = {
       url = "github:mtoohey31/helix/lean.hx";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,7 +102,7 @@
         selfName = "nixexprs";
       };
 
-      overlays.default = _: prev: let pkgs = prev; in import ./pkgs inputs pkgs;
+      overlays.default = _: prev: let pkgs = prev; in import ./pkgs pkgs;
     } // utils.lib.eachDefaultSystem (
       system:
       let
@@ -131,7 +124,7 @@
         };
 
         packages = self.lib.filterSupportedPackages system (
-          import ./pkgs inputs (import nixpkgs { inherit system; })
+          import ./pkgs (import nixpkgs { inherit system; })
         );
       }
     );
