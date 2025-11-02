@@ -187,7 +187,7 @@
         '';
         wraps = "ssh";
       };
-      lf.keybindings.gC = "&${pkgs.ghostty}/bin/ghostty -e fish -C lfcd &>/dev/null &";
+      lf.keybindings.gC = "&${pkgs.ghostty}/bin/ghostty -e env SHLVL=0 fish -C lfcd &>/dev/null &";
       mpv = {
         enable = true;
         config = {
