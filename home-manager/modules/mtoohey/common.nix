@@ -470,7 +470,7 @@ let cfg = config.mtoohey.common; in
                 wrap-indicator = "  ";
               };
               end-of-line-diagnostics = "hint";
-              inline-diagnostics.cursor-line = "warning";
+              inline-diagnostics.cursor-line = "hint";
             };
             keys = rec {
               select = rec {
