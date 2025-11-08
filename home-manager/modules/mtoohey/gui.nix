@@ -9,7 +9,6 @@
       ibm-plex
       nerd-fonts.jetbrains-mono
       socat
-    ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
@@ -38,7 +37,7 @@
           confirm-close-surface = false
         '';
       };
-      mimeApps = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
+      mimeApps = {
         enable = true;
         defaultApplications = {
           "application/pdf" = "org.pwmt.zathura.desktop";
@@ -55,7 +54,7 @@
     programs = {
       brave.enable = true;
       firefox = {
-        enable = !pkgs.stdenv.hostPlatform.isDarwin;
+        enable = true;
         profiles.default = {
           extensions.packages =
             let

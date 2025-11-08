@@ -3,7 +3,6 @@
 , lean-hx
 , lib
 , mattwparas-helix-config
-, nixexprs
 , nixpkgs
 , pkgs
 , squish
@@ -40,7 +39,6 @@ let cfg = config.mtoohey.common; in
           });
         })
     ] ++ [
-      nixexprs.overlays.default
       squish.overlays.default
       vimv2.overlays.default
     ];
@@ -57,10 +55,8 @@ let cfg = config.mtoohey.common; in
       wget
     ];
 
-    home.file = {
-      ".hushlogin" = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin { text = ""; };
-      ".steel/cogs/mattwparas-helix-package".source = mattwparas-helix-config;
-    };
+    home.file.".steel/cogs/mattwparas-helix-package".source =
+      mattwparas-helix-config;
 
     xdg.configFile = {
       "lf/cleaner" = {
@@ -106,16 +102,7 @@ let cfg = config.mtoohey.common; in
         trash-undo = "echo '' | trash-restore 2>/dev/null | sed '$d' | sort -k2,3 -k1,1n | awk 'END {print $1}' | trash-restore >/dev/null 2>&1";
       in
       {
-        bash = {
-          inherit (config.programs.fish) shellAliases;
-        } // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-          enableCompletion = false;
-          shellOptions = [
-            "histappend"
-            "checkwinsize"
-            "extglob"
-          ];
-        };
+        bash = { inherit (config.programs.fish) shellAliases; };
         bat = {
           enable = true;
           config = { style = "plain"; theme = "gruvbox-dark"; };
@@ -131,11 +118,7 @@ let cfg = config.mtoohey.common; in
         };
         fish = rec {
           enable = true;
-          shellAbbrs = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin
-            {
-              copy = "pbcopy";
-              paste = "pbpaste";
-            } // {
+          shellAbbrs = {
             c = "command";
             da = "direnv allow";
             dn = "direnv deny";
@@ -206,14 +189,14 @@ let cfg = config.mtoohey.common; in
                 exec tmux
               end
             '';
-          interactiveShellInit = let stty = if pkgs.stdenv.hostPlatform.isDarwin then "/bin/stty" else "stty"; in ''
+          interactiveShellInit = ''
             fish_vi_key_bindings
 
             bind -s -M visual e forward-single-char forward-word backward-char
             bind -s -M visual E forward-bigword backward-char
 
-            bind -s -M insert \cf 'set old_tty (${stty} -g); ${stty} sane; lfcd; ${stty} $old_tty; commandline -f repaint'
-            bind -s -M insert \cl '${if pkgs.stdenv.hostPlatform.isDarwin then "/usr/bin/tput reset" else "tput reset"}; if test -n "$TMUX"; tmux clear-history; else; printf "\e[5 q"; end; commandline -f repaint'
+            bind -s -M insert \cf 'set old_tty (stty -g); stty sane; lfcd; stty $old_tty; commandline -f repaint'
+            bind -s -M insert \cl 'tput reset; if test -n "$TMUX"; tmux clear-history; else; printf "\e[5 q"; end; commandline -f repaint'
 
             set fish_cursor_default block
             set fish_cursor_insert line

@@ -13,10 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -89,11 +85,6 @@
         };
       };
 
-      darwinModules = self.lib.callModules {
-        moduleListPath = ./nix-darwin/modules/module-list.nix;
-        inherit inputs;
-        selfName = "nixexprs";
-      };
       homeManagerModules = {
         inherit (nix-index-database.homeModules) nix-index;
       } // self.lib.callModules {
@@ -101,15 +92,10 @@
         inherit inputs;
         selfName = "nixexprs";
       };
-
-      overlays.default = _: prev: let pkgs = prev; in import ./pkgs pkgs;
     } // utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs {
-          overlays = builtins.attrValues self.overlays;
-          inherit system;
-        };
+        pkgs = import nixpkgs { inherit system; };
         inherit (pkgs) gnumake mkShell nil;
       in
       rec {
@@ -122,10 +108,6 @@
           inherit (checks.pre-commit) shellHook;
           packages = [ gnumake nil ];
         };
-
-        packages = self.lib.filterSupportedPackages system (
-          import ./pkgs (import nixpkgs { inherit system; })
-        );
       }
     );
 }
