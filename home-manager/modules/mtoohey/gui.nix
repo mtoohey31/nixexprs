@@ -12,7 +12,7 @@
     ] ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       nsxiv
       xdg-utils
     ];
