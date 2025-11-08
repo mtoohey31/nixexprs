@@ -42,17 +42,17 @@ let cfg = config.mtoohey.common; in
       vimv2.overlays.default
     ];
 
-    home.packages = with pkgs; [
-      comma
-      eza
-      fd
-      jq
-      ripgrep
-      pkgs.squish
-      trash-cli
-      pkgs.vimv2
-      wget
-    ];
+    home.packages = with pkgs;
+      lib.optional (!config.mtoohey.devel.enable) comma ++ [
+        eza
+        fd
+        jq
+        ripgrep
+        pkgs.squish
+        trash-cli
+        pkgs.vimv2
+        wget
+      ];
 
     home.file.".steel/cogs/mattwparas-helix-package".source =
       mattwparas-helix-config;
@@ -103,7 +103,7 @@ let cfg = config.mtoohey.common; in
           };
           nix-direnv.enable = true;
         };
-        fish = rec {
+        fish = {
           enable = true;
           shellAbbrs = {
             c = "command";
@@ -112,14 +112,12 @@ let cfg = config.mtoohey.common; in
             dr = "direnv reload";
             g = "git";
             pcp = "rsync -r --info=progress2";
-            rm = "trash";
           };
-          shellAliases = shellAbbrs // {
+          shellAliases = {
             inherit trash-undo;
+            cat = "bat";
             ls = "eza -a --icons --group-directories-first";
-            lsd = "eza -al --icons --group-directories-first";
-            lst = "eza -aT -L 5 --icons --group-directories-first";
-            lsta = "eza -aT --icons --group-directories-first";
+            rm = "trash";
           };
           functions = {
             lfcd = {
@@ -220,7 +218,6 @@ let cfg = config.mtoohey.common; in
 
             alias e "$EDITOR"
             abbr e "$EDITOR"
-            abbr cat bat
           '';
         };
         git = {
@@ -269,7 +266,6 @@ let cfg = config.mtoohey.common; in
               ds = "diff --staged";
               dst = "diff --staged --stat";
               dt = "diff --stat";
-              dw = "diff --no-prefix --unified=99999999999999999";
               e = "rebase";
               ea = "rebase --abort";
               ec = "rebase --continue";
@@ -301,8 +297,6 @@ let cfg = config.mtoohey.common; in
               msu = "remote set-url upstream";
               mx = "remote remove";
               o = "clone --recursive";
-              ob = "clone --bare";
-              onr = "clone";
               p = "push";
               pf = "push --force";
               pu = "!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)";
@@ -315,7 +309,6 @@ let cfg = config.mtoohey.common; in
               rsp = "restore --staged --patch .";
               s = "status --short";
               sh = "status --short .";
-              ssh = "!git remote set-url origin $(git remote get-url origin | sed -E 's,^https?://([^/]+)/,git@\\1:,')";
               t = "stash push --include-untracked --keep-index";
               ta = "stash apply";
               td = "stash drop";
@@ -325,7 +318,6 @@ let cfg = config.mtoohey.common; in
               ts = "stash show -p";
               tst = "stash show";
               u = "pull";
-              unbare = ''!f() { TARGET="$(echo "$1" | sed -E 's/\.git\/?$//')" && mkdir "$TARGET" && cp -r "$1" "$TARGET/.git" && cd "$TARGET" && git config --local --bool core.bare false && git reset --hard; }; f'';
               ur = "pull --rebase";
               urt = "pull --rebase --autostash";
               ut = "pull --autostash";
