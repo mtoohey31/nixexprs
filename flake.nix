@@ -41,10 +41,6 @@
         flake-utils.follows = "utils";
       };
     };
-    tree-sitter-ott = {
-      url = "github:armonjam/tree-sitter-ott";
-      flake = false;
-    };
     uncommitted-rs = {
       url = "github:mtoohey31/uncommitted-rs";
       inputs = {

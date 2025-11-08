@@ -224,7 +224,6 @@
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": "pre-commit-hooks",
         "squish": "squish",
-        "tree-sitter-ott": "tree-sitter-ott",
         "uncommitted-rs": "uncommitted-rs",
         "utils": "utils",
         "vimv2": "vimv2"
@@ -288,22 +287,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "tree-sitter-ott": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1723321780,
-        "narHash": "sha256-kYbRxzoG/s2KChbwvYuJwpPpJ/Ckn7oTWlBxfYVm4/M=",
-        "owner": "armonjam",
-        "repo": "tree-sitter-ott",
-        "rev": "67df80de360e04efde264508ec496916e3ddbd4c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "armonjam",
-        "repo": "tree-sitter-ott",
         "type": "github"
       }
     },

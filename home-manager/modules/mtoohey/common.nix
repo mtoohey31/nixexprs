@@ -6,7 +6,6 @@
 , nixpkgs
 , pkgs
 , squish
-, tree-sitter-ott
 , vimv2
 , ...
 }:
@@ -73,18 +72,6 @@ let cfg = config.mtoohey.common; in
       '';
       "helix/init.scm".text = /* scheme */ ''
         (require "cogs/lean.hx/keymap.scm")
-      '';
-      "helix/runtime/grammars/ott.so".source = pkgs.tree-sitter.buildGrammar
-        {
-          language = "ott";
-          version = tree-sitter-ott.shortRev;
-          src = tree-sitter-ott;
-        } + "/parser";
-      "helix/runtime/queries/ott/highlights.scm".source = tree-sitter-ott + "/queries/highlights.scm";
-      "helix/runtime/queries/ott/injections.scm".text = /* scheme */ ''
-        ((hom_body) @injection.content
-         (#set! injection.language "latex")
-         (#set! injection.include-unnamed-children))
       '';
     };
 
@@ -396,22 +383,6 @@ let cfg = config.mtoohey.common; in
                     "$" = "$";
                     "(" = ")";
                     "[" = "]";
-                  };
-                }
-                {
-                  name = "ott";
-                  scope = "source.ott";
-                  injection-regex = "ott";
-                  file-types = [ "ott" ];
-                  comment-token = "%";
-                  indent = { tab-width = 2; unit = "  "; };
-                  auto-pairs = {
-                    "'" = "'";
-                    "(" = ")";
-                    "/" = "/";
-                    "<" = ">";
-                    "[" = "]";
-                    "{" = "}";
                   };
                 }
                 {
