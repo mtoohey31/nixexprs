@@ -377,10 +377,8 @@ let cfg = config.mtoohey.common; in
                     "[" = "]";
                   };
                 }
-                {
-                  name = "typst";
-                  auto-format = true;
-                }
+                { name = "typst"; auto-format = true; }
+                { name = "bibtex"; auto-format = false; }
               ];
             language-server.nil.config.nil.formatting.command = [
               "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
