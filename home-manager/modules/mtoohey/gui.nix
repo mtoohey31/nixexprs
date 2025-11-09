@@ -89,6 +89,7 @@
           search = {
             default = "ddg";
             engines = {
+              "ddg".urls = [{ template = "https://noai.duckduckgo.com/?q={searchTerms}"; }];
               "Amazon.ca".metaData.hidden = true;
               "bing".metaData.hidden = true;
               "ebay".metaData.hidden = true;
