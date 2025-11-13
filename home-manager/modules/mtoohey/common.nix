@@ -22,6 +22,11 @@ let cfg = config.mtoohey.common; in
       type = lib.types.bool;
       default = true;
     };
+
+    uncached = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
   };
 
   config = lib.mkIf config.mtoohey.common.enable {
@@ -48,10 +53,11 @@ let cfg = config.mtoohey.common; in
         fd
         jq
         ripgrep
-        pkgs.squish
         trash-cli
-        pkgs.vimv2
         wget
+      ] ++ lib.optionals cfg.uncached [
+        pkgs.squish
+        pkgs.vimv2
       ];
 
     home.file.".steel/cogs/mattwparas-helix-package".source =
@@ -460,7 +466,8 @@ let cfg = config.mtoohey.common; in
         lf = {
           enable = true;
           commands = {
-            archive = ''%echo "\"$fx\"" | string join '" "' | xargs squish create "$argv" && lf -remote "send $id select \"$argv\""'';
+            archive = lib.mkIf cfg.uncached
+              ''%echo "\"$fx\"" | string join '" "' | xargs squish create "$argv" && lf -remote "send $id select \"$argv\""'';
             chmod = ''%echo "\"$fx\"" | string join '" "' | xargs chmod "$argv"; lf -remote "send $id reload"'';
             edit = ''
               ''${{
@@ -500,7 +507,7 @@ let cfg = config.mtoohey.common; in
             r = "reload";
             t = "push :touch<space>";
             u = "%{{ ${trash-undo} }}";
-            x = ''%squish extract "$f"'';
+            x = lib.mkIf cfg.uncached ''%squish extract "$f"'';
           };
           previewer.source = pkgs.writeShellScript "lf-previewer" ''
             ${pkgs.pistol}/bin/pistol "$@"
