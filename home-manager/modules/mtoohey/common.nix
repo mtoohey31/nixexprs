@@ -37,7 +37,10 @@ let cfg = config.mtoohey.common; in
       (_: prev:
         let inherit (prev) helix; in {
           helix = helix.overrideAttrs (oldAttrs: {
+            cargoBuildFeatures = [ "git" "steel" ];
             patches = oldAttrs.patches or [ ] ++ [
+              ./common/add-lsp-restart-file-command.patch
+              ./common/lean-file-progress-gutter.patch
               ./common/only-move-vertically-visually-without-count.patch
             ];
           });
@@ -60,8 +63,8 @@ let cfg = config.mtoohey.common; in
         pkgs.vimv2
       ];
 
-    home.file.".steel/cogs/mattwparas-helix-package".source =
-      mattwparas-helix-config;
+    home.file.".steel/cogs/mattwparas-helix-package" =
+      lib.mkIf cfg.helix-overlay { source = mattwparas-helix-config; };
 
     xdg.configFile = {
       "lf/cleaner" = {

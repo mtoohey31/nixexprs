@@ -67,16 +67,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1761080552,
-        "narHash": "sha256-xm+luuOibXjadRoWj7s74owy26dQEOzLkk91UsbLA8M=",
-        "owner": "mtoohey31",
+        "lastModified": 1765214490,
+        "narHash": "sha256-xDVuEKcBIY4cA7g9UwI8keimoHxQz/+fUXY7DA8EcsA=",
+        "owner": "mattwparas",
         "repo": "helix",
-        "rev": "4467f325319eeb95674d6803363cd7f9e2287115",
+        "rev": "a01f45b75ac20f8fa5ec7fd9f3c32e3ae8ab5d34",
         "type": "github"
       },
       "original": {
-        "owner": "mtoohey31",
-        "ref": "lean.hx",
+        "owner": "mattwparas",
+        "ref": "steel-event-system",
         "repo": "helix",
         "type": "github"
       }
@@ -237,11 +237,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740623427,
-        "narHash": "sha256-3SdPQrZoa4odlScFDUHd4CUPQ/R1gtH4Mq9u8CBiK8M=",
+        "lastModified": 1759631821,
+        "narHash": "sha256-V8A1L0FaU/aSXZ1QNJScxC12uP4hANeRBgI4YdhHeRM=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "d342e8b5fd88421ff982f383c853f0fc78a847ab",
+        "rev": "1d7cbdaad90f8a5255a89a6eddd8af24dc89cafe",
         "type": "github"
       },
       "original": {
