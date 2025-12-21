@@ -51,6 +51,8 @@
       };
     };
 
+    nixpkgs.overlays = [ firefox-addons.overlays.default ];
+
     programs = {
       brave.enable = true;
       firefox = {
@@ -60,9 +62,9 @@
             let
               inherit (pkgs.stdenv.hostPlatform) system;
               inherit (firefox-addons.lib.${system}) buildFirefoxXpiAddon;
-              inherit (firefox-addons.packages.${system}) bitwarden
-                don-t-fuck-with-paste furiganaize gruvbox-dark-theme h264ify
-                multi-account-containers temporary-containers;
+              inherit (pkgs.firefox-addons) bitwarden don-t-fuck-with-paste
+                furiganaize gruvbox-dark-theme h264ify multi-account-containers
+                temporary-containers youtube-recommended-videos;
               yomitan = buildFirefoxXpiAddon {
                 pname = "yomitan";
                 version = "24.4.16.0";
@@ -85,6 +87,7 @@
               # https://github.com/MarvNC/jmdict-yomitan/releases/latest/download/JMdict_english_with_examples.zip
               # and disable startup notification
               yomitan
+              youtube-recommended-videos
             ];
           search = {
             default = "ddg";
