@@ -19,12 +19,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix = {
-      url = "github:mattwparas/helix/steel-event-system";
+      url = "github:mtoohey31/helix/lean.hx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lean-hx = {
-      url = "git+https://github.com/mtoohey31/lean.hx?submodules=1";
-      flake = false;
+      url = "git+https://github.com/mtoohey31/lean.hx?submodules=1&dir=nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "utils";
+      };
     };
     mattwparas-helix-config = {
       url = "github:mattwparas/helix-config";

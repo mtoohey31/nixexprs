@@ -34,13 +34,12 @@ let cfg = config.mtoohey.common; in
 
     nixpkgs.overlays = lib.optionals cfg.helix-overlay [
       helix.overlays.default
+      lean-hx.overlays.default
       (_: prev:
         let inherit (prev) helix; in {
           helix = helix.overrideAttrs (oldAttrs: {
             cargoBuildFeatures = [ "git" "steel" ];
             patches = oldAttrs.patches or [ ] ++ [
-              ./common/add-lsp-restart-file-command.patch
-              ./common/lean-file-progress-gutter.patch
               ./common/only-move-vertically-visually-without-count.patch
             ];
           });
@@ -63,8 +62,12 @@ let cfg = config.mtoohey.common; in
         pkgs.vimv2
       ];
 
-    home.file.".steel/cogs/mattwparas-helix-package" =
-      lib.mkIf cfg.helix-overlay { source = mattwparas-helix-config; };
+    home.file = {
+      ".steel/cogs/mattwparas-helix-package" = lib.mkIf cfg.helix-overlay
+        { source = mattwparas-helix-config; };
+      ".steel/native/liblean_hx.so" = lib.mkIf cfg.helix-overlay
+        { source = "${pkgs."lean.hx"}/lib/liblean_hx.so"; };
+    };
 
     xdg.configFile = {
       "lf/cleaner" = {
@@ -74,14 +77,19 @@ let cfg = config.mtoohey.common; in
         '';
         executable = true;
       };
-      "helix/cogs/lean.hx".source = lean-hx;
-      "helix/helix.scm".text = /* scheme */ ''
-        (require "cogs/lean.hx/main.scm")
-        (provide lean-unicode)
-      '';
-      "helix/init.scm".text = /* scheme */ ''
-        (require "cogs/lean.hx/keymap.scm")
-      '';
+      "helix/cogs/lean.hx" = lib.mkIf cfg.helix-overlay
+        { source = "${lean-hx}/.."; };
+      "helix/helix.scm" = lib.mkIf cfg.helix-overlay {
+        text = /* scheme */ ''
+          (require "cogs/lean.hx/main.scm")
+          (provide lean-infoview lean-unicode)
+        '';
+      };
+      "helix/init.scm" = lib.mkIf cfg.helix-overlay {
+        text = /* scheme */ ''
+          (require "cogs/lean.hx/keymap.scm")
+        '';
+      };
     };
 
     home.sessionVariables = {
