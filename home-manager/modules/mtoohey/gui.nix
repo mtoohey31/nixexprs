@@ -18,7 +18,12 @@
 
     fonts.fontconfig.enable = true;
 
-    home.file.Downloads.source = config.lib.file.mkOutOfStoreSymlink config.home.homeDirectory;
+    home.file = {
+      Downloads.source =
+        config.lib.file.mkOutOfStoreSymlink config.home.homeDirectory;
+      Pictures.source =
+        config.lib.file.mkOutOfStoreSymlink config.home.homeDirectory;
+    };
     xdg = {
       configFile = {
         "fontconfig/fonts.conf" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux
