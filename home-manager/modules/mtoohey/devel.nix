@@ -1,12 +1,12 @@
-{ uncommitted-rs, config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.mtoohey.devel.enable = lib.mkEnableOption "devel";
 
   config = lib.mkIf config.mtoohey.devel.enable {
-    nixpkgs.overlays = [ uncommitted-rs.overlays.default ];
+    nixpkgs.overlays = [ ];
 
-    home.packages = with pkgs; [ nil pkgs.uncommitted-rs vscodium watchexec ];
+    home.packages = with pkgs; [ nil vscodium watchexec ];
 
     programs = {
       bash.enable = true;

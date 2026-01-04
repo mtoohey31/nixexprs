@@ -44,13 +44,6 @@
         flake-utils.follows = "utils";
       };
     };
-    uncommitted-rs = {
-      url = "github:mtoohey31/uncommitted-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "utils";
-      };
-    };
     vimv2 = {
       url = "github:mtoohey31/vimv2";
       inputs = {
