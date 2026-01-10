@@ -45,7 +45,9 @@
       mimeApps = {
         enable = true;
         defaultApplications = {
+          "application/epub+zip" = "org.pwmt.zathura.desktop";
           "application/pdf" = "org.pwmt.zathura.desktop";
+          "application/x-mobipocket-ebook" = "org.pwmt.zathura.desktop";
           "image/jpeg" = "nsxiv.desktop";
           "image/png" = "nsxiv.desktop";
           "image/x-portable-pixmap" = "nsxiv.desktop";
