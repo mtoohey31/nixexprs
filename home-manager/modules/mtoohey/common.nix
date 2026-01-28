@@ -70,13 +70,6 @@ let cfg = config.mtoohey.common; in
     };
 
     xdg.configFile = {
-      "lf/cleaner" = {
-        text = ''
-          #!${pkgs.bash}/bin/sh
-          ${pkgs.kitty}/bin/kitten icat --transfer-mode file --stdin no --clear </dev/null >/dev/tty
-        '';
-        executable = true;
-      };
       "helix/cogs/lean.hx" = lib.mkIf cfg.helix-overlay
         { source = "${lean-hx}/.."; };
       "helix/helix.scm" = lib.mkIf cfg.helix-overlay {
@@ -554,14 +547,6 @@ let cfg = config.mtoohey.common; in
             {
               mime = "application/json";
               command = "bat --paging=never --color=always --style=auto --wrap=character --terminal-width=%pistol-extra0% --line-range=1:%pistol-extra1% %pistol-filename%";
-            }
-            {
-              mime = "image/*";
-              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.kitty}/bin/kitten icat --transfer-mode file --stdin no --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% %pistol-filename% </dev/null >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% %pistol-filename%; fi'';
-            }
-            {
-              mime = "application/pdf";
-              command = ''sh: if [ "$TERM" = xterm-ghostty ]; then ${pkgs.poppler-utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png | ${pkgs.kitty}/bin/kitten icat --transfer-mode file --place %pistol-extra0%x%pistol-extra1%@%pistol-extra2%x%pistol-extra3% >/dev/tty && exit 1; else ${pkgs.chafa}/bin/chafa --format symbols --size %pistol-extra0%x%pistol-extra1% <(${pkgs.poppler-utils}/bin/pdftoppm -f 1 -l 1 %pistol-filename% -png); fi'';
             }
           ];
         };
