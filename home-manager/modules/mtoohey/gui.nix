@@ -69,9 +69,10 @@
             let
               inherit (pkgs.stdenv.hostPlatform) system;
               inherit (firefox-addons.lib.${system}) buildFirefoxXpiAddon;
-              inherit (pkgs.firefox-addons) bitwarden don-t-fuck-with-paste
-                furiganaize gruvbox-dark-theme h264ify multi-account-containers
-                temporary-containers youtube-recommended-videos;
+              inherit (pkgs.firefox-addons) bitwarden consent-o-matic
+                don-t-fuck-with-paste furiganaize gruvbox-dark-theme h264ify
+                multi-account-containers temporary-containers
+                youtube-recommended-videos;
               yomitan = buildFirefoxXpiAddon {
                 pname = "yomitan";
                 version = "24.4.16.0";
@@ -83,6 +84,7 @@
             in
             [
               bitwarden
+              consent-o-matic
               don-t-fuck-with-paste
               furiganaize
               gruvbox-dark-theme
